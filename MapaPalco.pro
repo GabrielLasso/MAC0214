@@ -26,15 +26,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     instrumento.cpp \
-    mapa.cpp
+    mapa.cpp \
+    mapawidget.cpp \
+    qgraphicstaikoitem.cpp
 
 HEADERS += \
         mainwindow.h \
     instrumento.h \
-    mapa.h
+    mapa.h \
+    mapawidget.h \
+    qgraphicstaikoitem.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    mapawidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

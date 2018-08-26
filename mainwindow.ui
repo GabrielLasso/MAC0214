@@ -54,6 +54,7 @@
     </property>
     <addaction name="actionNovo_Mapa"/>
     <addaction name="actionCarregar_Mapa"/>
+    <addaction name="actionSalvar_Mapa"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -74,6 +75,14 @@
   <action name="actionCarregar_Mapa">
    <property name="text">
     <string>&amp;Carregar Mapa</string>
+   </property>
+  </action>
+  <action name="actionSalvar_Mapa">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Salvar Mapa</string>
    </property>
   </action>
  </widget>

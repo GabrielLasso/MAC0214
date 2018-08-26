@@ -1,27 +1,11 @@
 #include "mapa.h"
-#include "ui_mapa.h"
 
-Mapa::Mapa(QWidget *parent, double height, double width, QList<Instrumento>* taikos) : QWidget(parent)
+Mapa::Mapa(double height, double width, QString titulo, QList<Instrumento>* taikos)
 {
     this->taikos = taikos;
     this->height = height;
+    this->titulo = titulo;
     this->width = width;
-}
-
-
-void Mapa::paintEvent(QPaintEvent *) {
-    QPainter p(this);
-    int side=50;
-    int i,j;
-    for (i=0;i<=height;i++){
-        for(j=0;j<=width;j++){
-            p.drawLine(j*side,0,j*side,int(height*side));
-        }
-        p.drawLine(0,i*side,int(width*side),i*side);
-    }
-    for (Instrumento taiko : *taikos) {
-        p.drawRect(int(side*taiko.x-10), int(side*taiko.y-10),20,20);
-    }
 }
 
 Mapa* Mapa::carrega_mapa(QString file_name) {
@@ -32,8 +16,12 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
 
     double height, width, x, y;
     QTextStream in(&file);
-    QString line = in.readLine();
-    QStringList fields = line.split(",");
+    QString line, image, titulo;
+    QStringList fields;
+    line = in.readLine();
+    titulo = line;
+    line = in.readLine();
+    fields = line.split(",");
     height = fields[0].toDouble();
     width = fields[1].toDouble();
     QList<Instrumento> *taikos = new QList<Instrumento>;
@@ -42,9 +30,10 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
         fields = line.split(",");
         x = fields[0].toDouble();
         y = fields[1].toDouble();
-        taikos->append(Instrumento(x,y));
+        image = fields[2];
+        taikos->append(Instrumento(x,y,image));
     }
 
     file.close();
-    return new Mapa(nullptr, height, width, taikos);
+    return new Mapa(height, width, titulo, taikos);
 }
