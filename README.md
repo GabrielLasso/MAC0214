@@ -48,3 +48,16 @@ x2,y2
 ...
 ```
 como o arquivo mapa_exemplo no commit https://github.com/GabrielLasso/MAC0214/tree/09432ae637ffa739ac54aa8b5cfe9bb63a348ab0.
+
+## Semana 19/08
+Agora o aplicativo suporta vários mapas carregados ao mesmo tempo, ficando separados em abas, e cada um fica em uma área delimitada, o que deixa mais organizado.
+
+Além disso, agora se poe adicionar instrumentos novos clicando em um botão, pode-se dar zoom no mapa e dá pra salvar e carregar os mapas salvos.
+
+O arquivo que o mapa é salvo agora tem a seguinte forma:
+```
+altura,largura
+x1,y1,instrumento1
+x2,y2,instrumento2
+...
+```
