@@ -28,14 +28,16 @@ SOURCES += \
     instrumento.cpp \
     mapa.cpp \
     mapawidget.cpp \
-    qgraphicstaikoitem.cpp
+    qgraphicstaikoitem.cpp \
+    mapascene.cpp
 
 HEADERS += \
         mainwindow.h \
     instrumento.h \
     mapa.h \
     mapawidget.h \
-    qgraphicstaikoitem.h
+    qgraphicstaikoitem.h \
+    mapascene.h
 
 FORMS += \
         mainwindow.ui \
