@@ -61,3 +61,11 @@ x1,y1,instrumento1
 x2,y2,instrumento2
 ...
 ```
+
+## Semana 26/08
+Foram adicionadas as seguintes ferramentas:
+- Uma lista de instrumentos que busca todas as imagens na pasta Images/
+- Seleção de instrumentos. Vários instrumentos selecionados se movem juntos.
+- Apertar delete apaga os instrumentos selecionados
+- O zoom pode ser dado com a roda do mouse
+- É possível mover instrumentos selecionados com as setas
