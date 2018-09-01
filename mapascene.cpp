@@ -5,15 +5,39 @@ MapaScene::MapaScene(QObject* parent):QGraphicsScene(parent)
 
 }
 
-void MapaScene::keyReleaseEvent(QKeyEvent * keyEvent)
+void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
 {
-    printf ("%d\n",keyEvent->key());
-    if(keyEvent->key() == Qt::Key_Delete)
-    {
-        QList<QGraphicsItem*> selectedItems = this->selectedItems(); // get list of selected items
+    QList<QGraphicsItem*> selectedItems = this->selectedItems();
+    switch(keyEvent->key()) {
+    case Qt::Key_Up:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            item->moveBy(0,-1);
+        }
+        break;
+    case Qt::Key_Down:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            item->moveBy(0,1);
+        }
+        break;
+    case Qt::Key_Left:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            item->moveBy(-1,0);
+        }
+        break;
+    case Qt::Key_Right:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            item->moveBy(1,0);
+        }
+        break;
+    case Qt::Key_Delete:
         foreach(QGraphicsItem* item, selectedItems)
         {
             delete item;
         }
+    break;
     }
 }

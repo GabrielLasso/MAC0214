@@ -13,9 +13,6 @@ public:
     qreal mapa_h, mapa_w, meter;
     int height, width;
 
-private:
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 #endif // QGRAPHICSTAIKOITEM_H

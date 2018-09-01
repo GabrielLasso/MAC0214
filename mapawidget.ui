@@ -27,7 +27,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QGraphicsView" name="view"/>
+      <widget class="MapaView" name="view"/>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -83,6 +83,16 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MapaView</class>
+   <extends>QGraphicsView</extends>
+   <header>mapaview.h</header>
+   <slots>
+    <signal>zoom(int)</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

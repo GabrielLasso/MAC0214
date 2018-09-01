@@ -7,7 +7,7 @@ class Instrumento
 {
 public:
     Instrumento(double x=0, double y=0, QString filename="");
-    double x, y;
+    qreal x, y;
     QString filename;
 };
 

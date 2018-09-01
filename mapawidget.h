@@ -9,11 +9,11 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFileDialog>
-#include <QtMath>
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QDirIterator>
 #include "mapascene.h"
+#include "mapaview.h"
 
 namespace Ui {
 class MapaWidget;
@@ -28,7 +28,7 @@ public:
     ~MapaWidget();
     Mapa* data;
     QLabel* titulo;
-    QGraphicsView* view;
+    MapaView* view;
     void save(QString filename);
     QList<Instrumento> getTaikos();
     QListWidget* instrumentos;
@@ -38,11 +38,13 @@ private slots:
 
     void on_add_taiko_clicked();
 
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::MapaWidget *ui;
     void createScene();
     void loadList();
-    void addInstrument(QString name);
+    void addInstrument(QString name, qreal x, qreal y);
     void updateScene(QList<Instrumento> taikos);
     MapaScene *scene;
 };

@@ -72,7 +72,7 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     scene->addLine(-data->width/2*meter,-data->height/2*meter,data->width/2*meter,-data->height/2*meter);
 
     for (Instrumento taiko : taikos) {
-        addInstrument(taiko.filename);
+        addInstrument(taiko.filename, taiko.x, taiko.y);
     }
 }
 
@@ -85,8 +85,8 @@ void MapaWidget::save(QString filename){
         foreach (QGraphicsItem* taiko, scene->items()){
             if (taiko->type() == QGraphicsTaikoItem::Type) {
                 Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->taiko;
-                taiko_data.x += taiko->x();
-                taiko_data.y += taiko->y();
+                taiko_data.x = taiko->pos().rx();
+                taiko_data.y = taiko->pos().ry();
                 stream<<taiko_data.x<<","<<taiko_data.y<<","<<taiko_data.filename<<endl;
             }
         }
@@ -94,12 +94,12 @@ void MapaWidget::save(QString filename){
     }
 }
 
-void MapaWidget::addInstrument(QString name) {
-    Instrumento taiko;
-    taiko.filename = name;
+void MapaWidget::addInstrument(QString name, qreal x=0, qreal y=0) {
+    Instrumento taiko(x,y,name);
     QGraphicsTaikoItem *t = new QGraphicsTaikoItem(taiko);
     t->setOffset(-t->width/2,-t->height/2);
     t->setFlag(QGraphicsItem::ItemIsSelectable);
+    t->setFlag(QGraphicsItem::ItemIsMovable);
     t->mapa_h = data->height;
     t->mapa_h = data->width;
     view->scene()->addItem(t);
@@ -107,10 +107,8 @@ void MapaWidget::addInstrument(QString name) {
 
 void MapaWidget::on_horizontalSlider_sliderMoved(int position)
 {
-    QMatrix matrix;
-    qreal zoom = qPow(2,((qreal(position)-50)/17));
-    matrix.scale(zoom,zoom);
-    view->setTransform(QTransform(matrix));
+    view->zoom = position;
+    view->setZoom();
 }
 
 void MapaWidget::on_add_taiko_clicked()
@@ -118,4 +116,9 @@ void MapaWidget::on_add_taiko_clicked()
     foreach (QListWidgetItem* instrumento, instrumentos->selectedItems()) {
         addInstrument(instrumento->text());
     }
+}
+
+void MapaWidget::on_horizontalSlider_valueChanged(int value)
+{
+    on_horizontalSlider_sliderMoved(value);
 }

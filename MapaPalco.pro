@@ -29,7 +29,8 @@ SOURCES += \
     mapa.cpp \
     mapawidget.cpp \
     qgraphicstaikoitem.cpp \
-    mapascene.cpp
+    mapascene.cpp \
+    mapaview.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -37,7 +38,8 @@ HEADERS += \
     mapa.h \
     mapawidget.h \
     qgraphicstaikoitem.h \
-    mapascene.h
+    mapascene.h \
+    mapaview.h
 
 FORMS += \
         mainwindow.ui \
