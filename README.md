@@ -69,3 +69,8 @@ Foram adicionadas as seguintes ferramentas:
 - Apertar delete apaga os instrumentos selecionados
 - O zoom pode ser dado com a roda do mouse
 - É possível mover instrumentos selecionados com as setas
+
+## Semana 02/09
+Criei um header no mapa contendo noe da música, nome da equipe e cidade da equipe.
+
+Além disso, importei algumas imagens de instrumentos usadas nos mapas do CFWU2018 para ver como ficam os mapas.
