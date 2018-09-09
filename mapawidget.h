@@ -12,6 +12,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QDirIterator>
+#include <QLineEdit>
 #include "mapascene.h"
 #include "mapaview.h"
 
@@ -27,7 +28,9 @@ public:
     explicit MapaWidget(QWidget *parent = nullptr, Mapa *data = nullptr);
     ~MapaWidget();
     Mapa* data;
-    QLabel* titulo;
+    QLineEdit* titulo;
+    QLineEdit* equipe;
+    QLineEdit* cidade;
     MapaView* view;
     void save(QString filename);
     QList<Instrumento> getTaikos();
@@ -38,7 +41,11 @@ private slots:
 
     void on_add_taiko_clicked();
 
-    void on_horizontalSlider_valueChanged(int value);
+    void on_musicNameLineEdit_textEdited(const QString &arg1);
+
+    void on_equipeLineEdit_textEdited(const QString &arg1);
+
+    void on_cidadeLineEdit_textEdited(const QString &arg1);
 
 private:
     Ui::MapaWidget *ui;

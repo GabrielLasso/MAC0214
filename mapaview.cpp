@@ -1,6 +1,7 @@
 #include "mapaview.h"
 
-MapaView::MapaView(QWidget* parent):QGraphicsView (parent) {
+MapaView::MapaView(QWidget* parent) :
+    QGraphicsView(parent) {
     zoom = 50;
     //setDragMode(QGraphicsView::ScrollHandDrag);
     setDragMode(QGraphicsView::RubberBandDrag);
@@ -15,10 +16,13 @@ void MapaView::setZoom(){
 
 void MapaView::wheelEvent(QWheelEvent *event) {
     if (event->delta() > 0) {
-        zoom += 1;
+        if (zoom < 100)
+            zoom += 1;
     }
     else {
-        zoom -= 1;
+        if (zoom > 0)
+            zoom -= 1;
     }
+    emit this->zoomChanged(zoom);
     setZoom();
 }

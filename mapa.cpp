@@ -1,10 +1,12 @@
 #include "mapa.h"
 
-Mapa::Mapa(double height, double width, QString titulo, QList<Instrumento>* taikos)
+Mapa::Mapa(double height, double width, QString titulo, QString equipe, QString cidade, QList<Instrumento>* taikos)
 {
     this->taikos = taikos;
     this->height = height;
     this->titulo = titulo;
+    this->equipe = equipe;
+    this->cidade = cidade;
     this->width = width;
 }
 
@@ -16,10 +18,14 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
 
     double height, width, x, y;
     QTextStream in(&file);
-    QString line, image, titulo;
+    QString line, image, titulo, equipe, cidade;
     QStringList fields;
     line = in.readLine();
     titulo = line;
+    line = in.readLine();
+    equipe = line;
+    line = in.readLine();
+    cidade = line;
     line = in.readLine();
     fields = line.split(",");
     height = fields[0].toDouble();
@@ -35,5 +41,5 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
     }
 
     file.close();
-    return new Mapa(height, width, titulo, taikos);
+    return new Mapa(height, width, titulo, equipe, cidade, taikos);
 }

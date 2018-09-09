@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QDialogButtonBox>
 #include <QLineEdit>
+#include <QDesktopWidget>
 
 namespace Ui {
 class MainWindow;
