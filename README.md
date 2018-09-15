@@ -74,3 +74,19 @@ Foram adicionadas as seguintes ferramentas:
 Criei um header no mapa contendo noe da música, nome da equipe e cidade da equipe.
 
 Além disso, importei algumas imagens de instrumentos usadas nos mapas do CFWU2018 para ver como ficam os mapas.
+
+## Semana 09/09
+Eu possibilitei girar os instrumentos de 15 em 15 graus e modifiquei o arquivo de save para que essa informação fique guradada.
+
+Agora o arquivo de save é assim:
+```
+Nome da música
+Equipe
+Cidade
+altura,largura
+x1,y1,alpha1,instrumento1
+x2,y2,alpha2,instrumento2
+...
+```
+
+Também mudei um pouco o design da edição do header e possibilitei editar o tamanho do mapa.
