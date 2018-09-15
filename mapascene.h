@@ -5,7 +5,7 @@
 #include <QGraphicsItem>
 #include <QList>
 #include <QKeyEvent>
-
+#include "qgraphicstaikoitem.h"
 
 class MapaScene : public QGraphicsScene
 {

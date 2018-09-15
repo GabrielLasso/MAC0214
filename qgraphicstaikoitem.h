@@ -12,7 +12,7 @@ public:
     Instrumento taiko;
     qreal mapa_h, mapa_w, meter;
     int height, width;
-
+    void rotate(qreal angle);
 };
 
 #endif // QGRAPHICSTAIKOITEM_H

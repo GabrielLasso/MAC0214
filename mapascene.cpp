@@ -39,5 +39,17 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
             delete item;
         }
     break;
+    case Qt::Key_Q:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(-15);
+        }
+    break;
+    case Qt::Key_W:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(15);
+        }
+    break;
     }
 }

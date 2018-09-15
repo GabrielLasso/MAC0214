@@ -16,7 +16,7 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
         return nullptr;
     }
 
-    double height, width, x, y;
+    double height, width, x, y, alpha;
     QTextStream in(&file);
     QString line, image, titulo, equipe, cidade;
     QStringList fields;
@@ -36,8 +36,9 @@ Mapa* Mapa::carrega_mapa(QString file_name) {
         fields = line.split(",");
         x = fields[0].toDouble();
         y = fields[1].toDouble();
-        image = fields[2];
-        taikos->append(Instrumento(x,y,image));
+        alpha = fields[2].toDouble();
+        image = fields[3];
+        taikos->append(Instrumento(x,y, alpha, image));
     }
 
     file.close();

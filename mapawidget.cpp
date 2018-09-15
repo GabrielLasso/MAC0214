@@ -7,13 +7,7 @@ MapaWidget::MapaWidget(QWidget *parent, Mapa *data) :
 {
     ui->setupUi(this);
     this->data = data;
-    this->titulo = ui->musicNameLineEdit;
-    this->equipe = ui->equipeLineEdit;
-    this->cidade = ui->cidadeLineEdit;
     this->view = ui->view;
-    this->titulo->setText(data->titulo);
-    this->equipe->setText(data->equipe);
-    this->cidade->setText(data->cidade);
     instrumentos = ui->taiko_list;
     createScene();
     loadList();
@@ -67,11 +61,11 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     pen5.setWidth(5);
 
     // Header
-    QGraphicsTextItem *title = scene->addText(titulo->text());
+    QGraphicsTextItem *title = scene->addText(data->titulo);
     QGraphicsTextItem *titleHUD = scene->addText("Nome da música");
-    QGraphicsTextItem *team = scene->addText(equipe->text());
+    QGraphicsTextItem *team = scene->addText(data->equipe);
     QGraphicsTextItem *teamHUD = scene->addText("Equipe");
-    QGraphicsTextItem *city = scene->addText(cidade->text());
+    QGraphicsTextItem *city = scene->addText(data->cidade);
     QGraphicsTextItem *cityHUD = scene->addText("Cidade");
     title->setPos((titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*meter);
     titleHUD->setPos(-data->width/2*meter, -(data->height/2+1)*meter);
@@ -108,7 +102,38 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
 
     // Taikos
     for (Instrumento taiko : taikos) {
-        addInstrument(taiko.filename, taiko.x, taiko.y);
+        addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle);
+    }
+}
+
+void MapaWidget::edit() {
+    QDialog* dialog = new QDialog;
+    QFormLayout form(dialog);
+    QLineEdit* mTitle= new QLineEdit(data->titulo, dialog);
+    QLineEdit* mTeam= new QLineEdit(data->equipe, dialog);
+    QLineEdit* mCity= new QLineEdit(data->cidade, dialog);
+    QDoubleSpinBox* mWidth= new QDoubleSpinBox(dialog);
+    mWidth->setValue(data->width);
+    QDoubleSpinBox* mHeight = new QDoubleSpinBox(dialog);;
+    mHeight->setValue(data->height);
+    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+                                   Qt::Horizontal, dialog);
+    form.addRow(QString("Título:"),mTitle);
+    form.addRow(QString("Equipe:"),mTeam);
+    form.addRow(QString("Cidade:"),mCity);
+    form.addRow(QString("Largura:"),mWidth);
+    form.addRow(QString("Altura:"),mHeight);
+    form.addRow(&buttonBox);
+    QObject::connect(&buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
+    QObject::connect(&buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+
+    if (dialog->exec() == QDialog::Accepted) {
+        data->height = mHeight->value();
+        data->width = mWidth->value();
+        data->titulo = mTitle->text();
+        data->equipe = mTeam->text();
+        data->cidade = mCity->text();
+        updateScene(getTaikos());
     }
 }
 
@@ -125,15 +150,15 @@ void MapaWidget::save(QString filename){
                 Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->taiko;
                 taiko_data.x = taiko->pos().rx();
                 taiko_data.y = taiko->pos().ry();
-                stream<<taiko_data.x<<","<<taiko_data.y<<","<<taiko_data.filename<<endl;
+                stream<<taiko_data.x<<","<<taiko_data.y<<","<<taiko_data.angle<<","<<taiko_data.filename<<endl;
             }
         }
         file.close();
     }
 }
 
-void MapaWidget::addInstrument(QString name, qreal x=0, qreal y=0) {
-    Instrumento taiko(x,y,name);
+void MapaWidget::addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0) {
+    Instrumento taiko(x,y,angle,name);
     QGraphicsTaikoItem *t = new QGraphicsTaikoItem(taiko);
     t->setOffset(-t->width/2,-t->height/2);
     t->setFlag(QGraphicsItem::ItemIsSelectable);
@@ -156,20 +181,7 @@ void MapaWidget::on_add_taiko_clicked()
     }
 }
 
-void MapaWidget::on_musicNameLineEdit_textEdited(const QString &arg1)
+void MapaWidget::on_pushButton_clicked()
 {
-    data->titulo = arg1;
-    updateScene(getTaikos());
-}
-
-void MapaWidget::on_equipeLineEdit_textEdited(const QString &arg1)
-{
-    data->equipe = arg1;
-    updateScene(getTaikos());
-}
-
-void MapaWidget::on_cidadeLineEdit_textEdited(const QString &arg1)
-{
-    data->cidade = arg1;
-    updateScene(getTaikos());
+    edit();
 }
