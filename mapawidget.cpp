@@ -188,9 +188,8 @@ void MapaWidget::on_pushButton_clicked()
 
 void MapaWidget::on_pushButton_2_clicked()
 {
-    QImage white_bg (50*(int(data->width)+2),50*(int(data->height)+2),QImage::Format_RGB32);
-    QImage img(50*(int(data->width)+2),50*(int(data->height)+2),QImage::Format_ARGB32_Premultiplied);
-//    white_bg.fill(QColor(Qt::white));
+    QImage white_bg (50*(int(data->width)+2),50*(int(data->height)+2),QImage::Format_ARGB32_Premultiplied);
+    white_bg.fill(QColor(Qt::white));
     QPainter p(&white_bg);
     scene->render(&p);
     p.end();
