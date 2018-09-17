@@ -16,6 +16,8 @@
 #include <QDoubleSpinBox>
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <QPainter>
+#include <QImage>
 #include "mapascene.h"
 #include "mapaview.h"
 
@@ -43,6 +45,8 @@ private slots:
     void on_add_taiko_clicked();
 
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MapaWidget *ui;
