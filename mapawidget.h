@@ -18,6 +18,8 @@
 #include <QFormLayout>
 #include <QPainter>
 #include <QImage>
+#include <QHash>
+#include <QHashIterator>
 #include "mapascene.h"
 #include "mapaview.h"
 

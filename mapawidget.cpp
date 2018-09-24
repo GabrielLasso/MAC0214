@@ -67,18 +67,18 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     QGraphicsTextItem *teamHUD = scene->addText("Equipe");
     QGraphicsTextItem *city = scene->addText(data->cidade);
     QGraphicsTextItem *cityHUD = scene->addText("Cidade");
-    title->setPos((titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*meter);
+    title->setPos((250+titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*meter);
     titleHUD->setPos(-data->width/2*meter, -(data->height/2+1)*meter);
-    team->setPos((-data->width*meter/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*meter-24);
+    team->setPos((125-data->width*meter/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*meter-24);
     teamHUD->setPos(-data->width/2*meter, -(data->height/2+1)*meter-24);
-    city->setPos((data->width*meter/2+cityHUD->boundingRect().width()-city->boundingRect().width())/2, -(data->height/2+1)*meter-24);
-    cityHUD->setPos(0,-(data->height/2+1)*meter-24);
-    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter,data->width*meter,24,pen3);
+    city->setPos((250+data->width*meter/2+cityHUD->boundingRect().width()-city->boundingRect().width())/2, -(data->height/2+1)*meter-24);
+    cityHUD->setPos(125,-(data->height/2+1)*meter-24);
+    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter,data->width*meter+250,24,pen3);
     scene->addLine(-data->width/2*meter+titleHUD->boundingRect().width(), -(data->height/2+1)*meter+24, -data->width/2*meter+titleHUD->boundingRect().width(), -(data->height/2+1)*meter);
-    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter-24,data->width*meter/2,24,pen3);
+    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter-24,data->width*meter/2+125,24,pen3);
     scene->addLine(-data->width/2*meter+teamHUD->boundingRect().width(), -(data->height/2+1)*meter-24, -data->width/2*meter+teamHUD->boundingRect().width(), -(data->height/2+1)*meter);
-    scene->addRect(0,-(data->height/2+1)*meter-24,data->width*meter/2,24,pen3);
-    scene->addLine(cityHUD->boundingRect().width(), -(data->height/2+1)*meter-24, cityHUD->boundingRect().width(), -(data->height/2+1)*meter);
+    scene->addRect(125,-(data->height/2+1)*meter-24,data->width*meter/2+125,24,pen3);
+    scene->addLine(125+cityHUD->boundingRect().width(), -(data->height/2+1)*meter-24, 125+cityHUD->boundingRect().width(), -(data->height/2+1)*meter);
 
     // Grid
     scene->addLine(-data->width/2*meter+2,0,data->width/2*meter-2,0,pen5);
@@ -103,6 +103,23 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     // Taikos
     for (Instrumento taiko : taikos) {
         addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle);
+    }
+
+    // Instrument List
+    QHash<QString, int> instrument_hash;
+    scene->addRect((data->width/2+1)*meter, -data->height/2*meter,200,data->height*meter);
+    QGraphicsTextItem *instrumentos_title = scene->addText("Instrumentos");
+    instrumentos_title->setPos((data->width/2+1)*meter+100-instrumentos_title->boundingRect().width()/2, -data->height/2*meter);
+    for (Instrumento taiko : taikos) {
+        instrument_hash.insert(taiko.filename,instrument_hash.value(taiko.filename)+1);
+    }
+    QHashIterator<QString, int> iterator(instrument_hash);
+    for (i = 2; iterator.hasNext(); i++) {
+        iterator.next();
+        QGraphicsTextItem *instrument_name = scene->addText(iterator.key());
+        instrument_name->setPos((data->width/2+1)*meter, -data->height/2*meter+16*i);
+        QGraphicsTextItem *instrument_count = scene->addText(QString::number(iterator.value()));
+        instrument_count->setPos((data->width/2+1)*meter+184, -data->height/2*meter+16*i);
     }
 }
 
@@ -179,6 +196,7 @@ void MapaWidget::on_add_taiko_clicked()
     foreach (QListWidgetItem* instrumento, instrumentos->selectedItems()) {
         addInstrument(instrumento->text());
     }
+    updateScene(getTaikos());
 }
 
 void MapaWidget::on_pushButton_clicked()
