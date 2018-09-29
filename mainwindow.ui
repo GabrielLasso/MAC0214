@@ -72,7 +72,7 @@
    </widget>
    <widget class="QMenu" name="menuEditar">
     <property name="title">
-     <string>Editar</string>
+     <string>Edita&amp;r</string>
     </property>
     <addaction name="actionPropriedades_do_mapa"/>
    </widget>
@@ -90,12 +90,12 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNovo_Mapa">
    <property name="text">
-    <string>&amp;Novo Mapa (Ctrl + N)</string>
+    <string>&amp;Novo Mapa (Ctrl+N)</string>
    </property>
   </action>
   <action name="actionCarregar_Mapa">
    <property name="text">
-    <string>&amp;Carregar Mapa (Ctrl + L)</string>
+    <string>&amp;Carregar Mapa (Ctrl+L)</string>
    </property>
   </action>
   <action name="actionSalvar_Mapa">
@@ -103,7 +103,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Salvar Mapa (Ctrl + S)</string>
+    <string>&amp;Salvar Mapa (Ctrl+S)</string>
    </property>
   </action>
   <action name="actionExportar_como_imagem">
