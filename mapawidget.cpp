@@ -29,6 +29,7 @@ void MapaWidget::loadList() {
             instrumentos->addItem(instr);
         }
     }
+    instrumentos->sortItems();
 }
 
 QList<Instrumento> MapaWidget::getTaikos() {
