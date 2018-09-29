@@ -95,3 +95,14 @@ Também mudei um pouco o design da edição do header e possibilitei editar o ta
 Essa semana eu no consegui trabalhar as 6 horas previstas  no projeto, só trabalhei cerca de 3 horas. Vou tentar compensar isso nas outras semanas.
 
 Adicionei a opção de exportar para PNG e criei uma lista de instrumentos usados ao lado do mapa
+
+## Semana 23/09
+- Adicionei shortcuts para novo mapa, carregar mapa e salvar mapa
+- Arrumei o tamanho da imagem exportada
+- Tirei os botões de editar propriedades e de exportar imagem e coloquei opções no menu
+- Melhorei as configurações do FileDialog
+- Mudei o input para rotacionar os intrumentos
+- Importei mais imagens
+- Ordenei a lista de instrumentos alfabeticamente
+- Arrumei o posicionamento dos textos
+- Arrumei um bug que quando deletava um instrumento não atualizava a lista de instrumentos usados
