@@ -40,6 +40,7 @@ public:
     QList<Instrumento> getTaikos();
     void edit();
     void exportToImage(QString filename);
+    void updateScene(QList<Instrumento> taikos);
 
 private slots:
     void on_horizontalSlider_sliderMoved(int position);
@@ -52,7 +53,6 @@ private:
     void createScene();
     void loadList();
     void addInstrument(QString name, qreal x, qreal y, qreal angle);
-    void updateScene(QList<Instrumento> taikos);
     MapaScene *scene;
     QListWidget* instrumentos;
 };

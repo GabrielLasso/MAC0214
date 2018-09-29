@@ -65,20 +65,22 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     // Header
     QGraphicsTextItem *title = scene->addText(data->titulo);
     QGraphicsTextItem *titleHUD = scene->addText("Nome da música");
-    QGraphicsTextItem *team = scene->addText(data->equipe);
-    QGraphicsTextItem *teamHUD = scene->addText("Equipe");
-    QGraphicsTextItem *city = scene->addText(data->cidade);
-    QGraphicsTextItem *cityHUD = scene->addText("Cidade");
     title->setPos((200+ppm+titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*ppm);
     titleHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm);
-    team->setPos(((200+ppm)/2-data->width*ppm/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
-    teamHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm-24);
-    city->setPos((200+ppm+data->width*ppm/2+cityHUD->boundingRect().width()-city->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
-    cityHUD->setPos((200+ppm)/2,-(data->height/2+1)*ppm-24);
     scene->addRect(-data->width/2*ppm,-(data->height/2+1)*ppm,data->width*ppm+200+ppm,24,pen3);
     scene->addLine(-data->width/2*ppm+titleHUD->boundingRect().width(), -(data->height/2+1)*ppm+24, -data->width/2*ppm+titleHUD->boundingRect().width(), -(data->height/2+1)*ppm);
+
+    QGraphicsTextItem *team = scene->addText(data->equipe);
+    QGraphicsTextItem *teamHUD = scene->addText("Equipe");
+    team->setPos(((200+ppm)/2-data->width*ppm/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
+    teamHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm-24);
     scene->addRect(-data->width/2*ppm,-(data->height/2+1)*ppm-24,data->width*ppm/2+125,24,pen3);
     scene->addLine(-data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, -data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm);
+
+    QGraphicsTextItem *city = scene->addText(data->cidade);
+    QGraphicsTextItem *cityHUD = scene->addText("Cidade");
+    city->setPos((200+ppm)/2+cityHUD->boundingRect().width() + ((200+ppm*(1+data->width))/2-cityHUD->boundingRect().width())/2-city->boundingRect().width()/2, -(data->height/2+1)*ppm-24);
+    cityHUD->setPos((200+ppm)/2,-(data->height/2+1)*ppm-24);
     scene->addRect((200+ppm)/2,-(data->height/2+1)*ppm-24,data->width*ppm/2+(200+ppm)/2,24,pen3);
     scene->addLine((200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, (200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm);
 
