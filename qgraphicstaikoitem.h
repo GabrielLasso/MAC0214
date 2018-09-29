@@ -10,7 +10,6 @@ class QGraphicsTaikoItem : public QGraphicsPixmapItem
 public:
     QGraphicsTaikoItem(Instrumento taiko);
     Instrumento taiko;
-    qreal mapa_h, mapa_w, meter;
     int height, width;
     void rotate(qreal angle);
 };
