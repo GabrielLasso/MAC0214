@@ -90,3 +90,8 @@ x2,y2,alpha2,instrumento2
 ```
 
 Também mudei um pouco o design da edição do header e possibilitei editar o tamanho do mapa.
+
+## Semana 16/09
+Essa semana eu no consegui trabalhar as 6 horas previstas  no projeto, só trabalhei cerca de 3 horas. Vou tentar compensar isso nas outras semanas.
+
+Adicionei a opção de exportar para PNG e criei uma lista de instrumentos usados ao lado do mapa
