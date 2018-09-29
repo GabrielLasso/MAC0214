@@ -54,7 +54,7 @@ void MainWindow::criaMapa() {
 
 void MainWindow::carregaMapa() {
     Mapa* map;
-    QString file_name = QFileDialog::getOpenFileName(nullptr,"Carregar Mapa");
+    QString file_name = QFileDialog::getOpenFileName(nullptr,"Carregar Mapa", "", "Mapas de taiko(*.abt);;Todos os arquivos(*)");
     if ((map=Mapa::carrega_mapa(file_name)) != nullptr) {
         mostraMapa(map);
     }
@@ -63,14 +63,16 @@ void MainWindow::carregaMapa() {
 void MainWindow::salvaMapa() {
     if (ui->tabWidget->count() <= 0)
         return;
-    QString file_name = QFileDialog::getSaveFileName(nullptr,"Salvar mapa");
+    QString name = dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->data->titulo;
+    QString file_name = QFileDialog::getSaveFileName(nullptr,"Salvar mapa", name+".abt", "Mapas de taiko(*.abt);;Todos os arquivos(*)");
     dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->save(file_name);
 }
 
 void MainWindow::exportaImagem() {
     if (ui->tabWidget->count() <= 0)
         return;
-    QString file_name = QFileDialog::getSaveFileName(nullptr,"Exportar Para...");
+    QString name = dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->data->titulo;
+    QString file_name = QFileDialog::getSaveFileName(nullptr,"Exportar Para...", name+".png", "Imagens(*.png *.xpm *.jpg);;Todos os arquivos(*)");
     dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->exportToImage(file_name);
 }
 

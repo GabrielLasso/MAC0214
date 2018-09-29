@@ -200,11 +200,6 @@ void MapaWidget::on_add_taiko_clicked()
     updateScene(getTaikos());
 }
 
-void MapaWidget::on_editButton_clicked()
-{
-    edit();
-}
-
 void MapaWidget::exportToImage(QString filename) {
     QImage white_bg (ppm*(int(data->width)+1)+200,ppm*(int(data->height)+1)+24,QImage::Format_ARGB32_Premultiplied);
     white_bg.fill(QColor(Qt::white));
@@ -214,8 +209,3 @@ void MapaWidget::exportToImage(QString filename) {
     white_bg.save(filename);
 }
 
-void MapaWidget::on_exportButton_clicked()
-{
-    QString file_name = QFileDialog::getSaveFileName(nullptr,"Exportar para...");
-    exportToImage(file_name);
-}

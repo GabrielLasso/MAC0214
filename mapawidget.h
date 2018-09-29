@@ -46,10 +46,6 @@ private slots:
 
     void on_add_taiko_clicked();
 
-    void on_editButton_clicked();
-
-    void on_exportButton_clicked();
-
 private:
     int ppm;
     Ui::MapaWidget *ui;
