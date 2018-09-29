@@ -5,6 +5,7 @@
 #include <QMatrix>
 #include <QtMath>
 #include <QPointF>
+#include "qgraphicstaikoitem.h"
 
 class MapaView : public QGraphicsView
 {

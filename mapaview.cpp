@@ -15,14 +15,16 @@ void MapaView::setZoom(){
 }
 
 void MapaView::wheelEvent(QWheelEvent *event) {
-    if (event->delta() > 0) {
-        if (zoom < 100)
-            zoom += 1;
+    if (scene()->selectedItems().empty())
+        QGraphicsView::wheelEvent(event);
+
+    foreach(QGraphicsItem* item, scene()->selectedItems())
+    {
+        if (event->delta() > 0) {
+            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(5);
+        }
+        else {
+            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(-5);
+        }
     }
-    else {
-        if (zoom > 0)
-            zoom -= 1;
-    }
-    emit this->zoomChanged(zoom);
-    setZoom();
 }
