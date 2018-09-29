@@ -5,6 +5,7 @@ MapaWidget::MapaWidget(QWidget *parent, Mapa *data) :
     QWidget(parent),
     ui(new Ui::MapaWidget)
 {
+    ppm = 50; // Pixel per meter
     ui->setupUi(this);
     this->data = data;
     this->view = ui->view;
@@ -52,7 +53,7 @@ void MapaWidget::createScene() {
 }
 
 void MapaWidget::updateScene(QList<Instrumento> taikos) {
-    int i,j, meter = 50;
+    int i,j;
     QPen pen3(QColor(0,0,0));
     QPen pen5(QColor(0,0,0));
 
@@ -67,38 +68,38 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     QGraphicsTextItem *teamHUD = scene->addText("Equipe");
     QGraphicsTextItem *city = scene->addText(data->cidade);
     QGraphicsTextItem *cityHUD = scene->addText("Cidade");
-    title->setPos((250+titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*meter);
-    titleHUD->setPos(-data->width/2*meter, -(data->height/2+1)*meter);
-    team->setPos((125-data->width*meter/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*meter-24);
-    teamHUD->setPos(-data->width/2*meter, -(data->height/2+1)*meter-24);
-    city->setPos((250+data->width*meter/2+cityHUD->boundingRect().width()-city->boundingRect().width())/2, -(data->height/2+1)*meter-24);
-    cityHUD->setPos(125,-(data->height/2+1)*meter-24);
-    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter,data->width*meter+250,24,pen3);
-    scene->addLine(-data->width/2*meter+titleHUD->boundingRect().width(), -(data->height/2+1)*meter+24, -data->width/2*meter+titleHUD->boundingRect().width(), -(data->height/2+1)*meter);
-    scene->addRect(-data->width/2*meter,-(data->height/2+1)*meter-24,data->width*meter/2+125,24,pen3);
-    scene->addLine(-data->width/2*meter+teamHUD->boundingRect().width(), -(data->height/2+1)*meter-24, -data->width/2*meter+teamHUD->boundingRect().width(), -(data->height/2+1)*meter);
-    scene->addRect(125,-(data->height/2+1)*meter-24,data->width*meter/2+125,24,pen3);
-    scene->addLine(125+cityHUD->boundingRect().width(), -(data->height/2+1)*meter-24, 125+cityHUD->boundingRect().width(), -(data->height/2+1)*meter);
+    title->setPos((200+ppm+titleHUD->boundingRect().width()-title->boundingRect().width())/2, -(data->height/2+1)*ppm);
+    titleHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm);
+    team->setPos(((200+ppm)/2-data->width*ppm/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
+    teamHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm-24);
+    city->setPos((200+ppm+data->width*ppm/2+cityHUD->boundingRect().width()-city->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
+    cityHUD->setPos((200+ppm)/2,-(data->height/2+1)*ppm-24);
+    scene->addRect(-data->width/2*ppm,-(data->height/2+1)*ppm,data->width*ppm+200+ppm,24,pen3);
+    scene->addLine(-data->width/2*ppm+titleHUD->boundingRect().width(), -(data->height/2+1)*ppm+24, -data->width/2*ppm+titleHUD->boundingRect().width(), -(data->height/2+1)*ppm);
+    scene->addRect(-data->width/2*ppm,-(data->height/2+1)*ppm-24,data->width*ppm/2+125,24,pen3);
+    scene->addLine(-data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, -data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm);
+    scene->addRect((200+ppm)/2,-(data->height/2+1)*ppm-24,data->width*ppm/2+(200+ppm)/2,24,pen3);
+    scene->addLine((200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, (200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm);
 
     // Grid
-    scene->addLine(-data->width/2*meter+2,0,data->width/2*meter-2,0,pen5);
-    scene->addLine(0,-data->height/2*meter+2,0,data->height/2*meter-2,pen5);
+    scene->addLine(-data->width/2*ppm+2,0,data->width/2*ppm-2,0,pen5);
+    scene->addLine(0,-data->height/2*ppm+2,0,data->height/2*ppm-2,pen5);
     for (i=-int(data->height/2);i<=data->height/2;i++){
         for(j=-int(data->width/2);j<=data->width/2;j++){
             if (j%2==0)
-                scene->addLine(j*meter,-data->height*meter/2+1,j*meter,data->height*meter/2-1, pen3);
+                scene->addLine(j*ppm,-data->height*ppm/2+1,j*ppm,data->height*ppm/2-1, pen3);
             else
-                scene->addLine(j*meter,-data->height*meter/2,j*meter,data->height*meter/2);
+                scene->addLine(j*ppm,-data->height*ppm/2,j*ppm,data->height*ppm/2);
         }
         if (i%2==0)
-            scene->addLine(-data->width*meter/2+1,i*meter,data->width*meter/2-1,i*meter, pen3);
+            scene->addLine(-data->width*ppm/2+1,i*ppm,data->width*ppm/2-1,i*ppm, pen3);
         else
-            scene->addLine(-data->width*meter/2,i*meter,data->width*meter/2,i*meter);
+            scene->addLine(-data->width*ppm/2,i*ppm,data->width*ppm/2,i*ppm);
     }
-    scene->addLine(data->width/2*meter,-data->height/2*meter,data->width/2*meter,data->height/2*meter);
-    scene->addLine(-data->width/2*meter,data->height/2*meter,data->width/2*meter,data->height/2*meter);
-    scene->addLine(-data->width/2*meter,-data->height/2*meter,-data->width/2*meter,data->height/2*meter);
-    scene->addLine(-data->width/2*meter,-data->height/2*meter,data->width/2*meter,-data->height/2*meter);
+    scene->addLine(data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
+    scene->addLine(-data->width/2*ppm,data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
+    scene->addLine(-data->width/2*ppm,-data->height/2*ppm,-data->width/2*ppm,data->height/2*ppm);
+    scene->addLine(-data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,-data->height/2*ppm);
 
     // Taikos
     for (Instrumento taiko : taikos) {
@@ -107,9 +108,9 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
 
     // Instrument List
     QHash<QString, int> instrument_hash;
-    scene->addRect((data->width/2+1)*meter, -data->height/2*meter,200,data->height*meter);
+    scene->addRect((data->width/2+1)*ppm, -data->height/2*ppm,200,data->height*ppm);
     QGraphicsTextItem *instrumentos_title = scene->addText("Instrumentos");
-    instrumentos_title->setPos((data->width/2+1)*meter+100-instrumentos_title->boundingRect().width()/2, -data->height/2*meter);
+    instrumentos_title->setPos((data->width/2+1)*ppm+100-instrumentos_title->boundingRect().width()/2, -data->height/2*ppm);
     for (Instrumento taiko : taikos) {
         instrument_hash.insert(taiko.filename,instrument_hash.value(taiko.filename)+1);
     }
@@ -117,9 +118,9 @@ void MapaWidget::updateScene(QList<Instrumento> taikos) {
     for (i = 2; iterator.hasNext(); i++) {
         iterator.next();
         QGraphicsTextItem *instrument_name = scene->addText(iterator.key());
-        instrument_name->setPos((data->width/2+1)*meter, -data->height/2*meter+16*i);
+        instrument_name->setPos((data->width/2+1)*ppm, -data->height/2*ppm+16*i);
         QGraphicsTextItem *instrument_count = scene->addText(QString::number(iterator.value()));
-        instrument_count->setPos((data->width/2+1)*meter+184, -data->height/2*meter+16*i);
+        instrument_count->setPos((data->width/2+1)*ppm+184, -data->height/2*ppm+16*i);
     }
 }
 
@@ -199,17 +200,22 @@ void MapaWidget::on_add_taiko_clicked()
     updateScene(getTaikos());
 }
 
-void MapaWidget::on_pushButton_clicked()
+void MapaWidget::on_editButton_clicked()
 {
     edit();
 }
 
-void MapaWidget::on_pushButton_2_clicked()
-{
-    QImage white_bg (50*(int(data->width)+2),50*(int(data->height)+2),QImage::Format_ARGB32_Premultiplied);
+void MapaWidget::exportToImage(QString filename) {
+    QImage white_bg (ppm*(int(data->width)+1)+200,ppm*(int(data->height)+1)+24,QImage::Format_ARGB32_Premultiplied);
     white_bg.fill(QColor(Qt::white));
     QPainter p(&white_bg);
     scene->render(&p);
     p.end();
-    white_bg.save("XXX.bmp");
+    white_bg.save(filename);
+}
+
+void MapaWidget::on_exportButton_clicked()
+{
+    QString file_name = QFileDialog::getSaveFileName(nullptr,"Exportar para...");
+    exportToImage(file_name);
 }

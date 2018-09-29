@@ -38,25 +38,27 @@ public:
     MapaView* view;
     void save(QString filename);
     QList<Instrumento> getTaikos();
-    QListWidget* instrumentos;
     void edit();
+    void exportToImage(QString filename);
 
 private slots:
     void on_horizontalSlider_sliderMoved(int position);
 
     void on_add_taiko_clicked();
 
-    void on_pushButton_clicked();
+    void on_editButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_exportButton_clicked();
 
 private:
+    int ppm;
     Ui::MapaWidget *ui;
     void createScene();
     void loadList();
     void addInstrument(QString name, qreal x, qreal y, qreal angle);
     void updateScene(QList<Instrumento> taikos);
     MapaScene *scene;
+    QListWidget* instrumentos;
 };
 
 #endif // MAPAWIDGET_H

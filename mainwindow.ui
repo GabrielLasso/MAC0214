@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>153</width>
+    <height>87</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
     <horstretch>0</horstretch>
@@ -59,8 +67,17 @@
     <addaction name="actionNovo_Mapa"/>
     <addaction name="actionCarregar_Mapa"/>
     <addaction name="actionSalvar_Mapa"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportar_como_imagem"/>
+   </widget>
+   <widget class="QMenu" name="menuEditar">
+    <property name="title">
+     <string>Editar</string>
+    </property>
+    <addaction name="actionPropriedades_do_mapa"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEditar"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -73,12 +90,12 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNovo_Mapa">
    <property name="text">
-    <string>&amp;Novo Mapa</string>
+    <string>&amp;Novo Mapa (Ctrl + N)</string>
    </property>
   </action>
   <action name="actionCarregar_Mapa">
    <property name="text">
-    <string>&amp;Carregar Mapa</string>
+    <string>&amp;Carregar Mapa (Ctrl + L)</string>
    </property>
   </action>
   <action name="actionSalvar_Mapa">
@@ -86,7 +103,23 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Salvar Mapa</string>
+    <string>&amp;Salvar Mapa (Ctrl + S)</string>
+   </property>
+  </action>
+  <action name="actionExportar_como_imagem">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Exportar como imagem</string>
+   </property>
+  </action>
+  <action name="actionPropriedades_do_mapa">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Propriedades do mapa</string>
    </property>
   </action>
  </widget>

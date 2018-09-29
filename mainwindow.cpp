@@ -5,14 +5,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(criaMapa()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(salvaMapa()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(carregaMapa()));
     ui->setupUi(this);
     novoMapa = ui->actionNovo_Mapa;
     loadMapa = ui->actionCarregar_Mapa;
     saveMapa = ui->actionSalvar_Mapa;
+    exportMapa = ui->actionExportar_como_imagem;
+    editMapa = ui->actionPropriedades_do_mapa;
     resize(QDesktopWidget().availableGeometry(this).size());
     connect(novoMapa, SIGNAL(triggered()), this, SLOT(criaMapa()));
     connect(loadMapa, SIGNAL(triggered()), this, SLOT(carregaMapa()));
     connect(saveMapa, SIGNAL(triggered()), this, SLOT(salvaMapa()));
+    connect(exportMapa, SIGNAL(triggered()), this, SLOT(exportaImagem()));
+    connect(editMapa, SIGNAL(triggered()), this, SLOT(propriedadesMapa()));
 }
 
 MainWindow::~MainWindow()
@@ -54,19 +61,39 @@ void MainWindow::carregaMapa() {
 }
 
 void MainWindow::salvaMapa() {
+    if (ui->tabWidget->count() <= 0)
+        return;
     QString file_name = QFileDialog::getSaveFileName(nullptr,"Salvar mapa");
     dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->save(file_name);
+}
+
+void MainWindow::exportaImagem() {
+    if (ui->tabWidget->count() <= 0)
+        return;
+    QString file_name = QFileDialog::getSaveFileName(nullptr,"Exportar Para...");
+    dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->exportToImage(file_name);
+}
+
+void MainWindow::propriedadesMapa() {
+    if (ui->tabWidget->count() <= 0)
+        return;
+    dynamic_cast<MapaWidget*>(ui->tabWidget->currentWidget())->edit();
 }
 
 void MainWindow::mostraMapa(Mapa* map){
     MapaWidget* mapa = new MapaWidget (nullptr, map);
     ui->tabWidget->addTab(mapa,map->titulo);
     saveMapa->setEnabled(true);
+    editMapa->setEnabled(true);
+    exportMapa->setEnabled(true);
 }
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index)
 {
     ui->tabWidget->removeTab(index);
-    if (ui->tabWidget->count() <= 0)
+    if (ui->tabWidget->count() <= 0) {
         saveMapa->setEnabled(false);
+        editMapa->setEnabled(false);
+        exportMapa->setEnabled(false);
+    }
 }

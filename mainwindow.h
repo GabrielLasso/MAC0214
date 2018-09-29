@@ -11,6 +11,8 @@
 #include <QDialogButtonBox>
 #include <QLineEdit>
 #include <QDesktopWidget>
+#include <QShortcut>
+#include <QKeySequence>
 
 namespace Ui {
 class MainWindow;
@@ -29,12 +31,16 @@ private:
     QAction* novoMapa;
     QAction* loadMapa;
     QAction* saveMapa;
+    QAction* exportMapa;
+    QAction* editMapa;
     void mostraMapa(Mapa* map);
 
 public slots:
     void criaMapa();
     void carregaMapa();
     void salvaMapa();
+    void exportaImagem();
+    void propriedadesMapa();
 
 private slots:
     void on_tabWidget_tabCloseRequested(int index);
