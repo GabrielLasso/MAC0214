@@ -5,11 +5,11 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(Instrumento taiko):QGraphicsPixmapItem(QP
     setPos(taiko.x, taiko.y);
     this->height = QPixmap("Image/"+taiko.filename).height();
     this->width = QPixmap("Image/"+taiko.filename).width();
-    this->taiko = taiko;
+    this->data = taiko;
     this->setRotation(taiko.angle);
 }
 
 void QGraphicsTaikoItem::rotate(qreal angle) {
-    taiko.angle += angle;
-    this->setRotation(taiko.angle);
+    data.angle += angle;
+    this->setRotation(data.angle);
 }

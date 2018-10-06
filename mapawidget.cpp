@@ -82,7 +82,7 @@ void MapaWidget::save(QString filename){
         stream<<data->height<<","<<data->width<<endl;
         foreach (QGraphicsItem* taiko, scene->items()){
             if (taiko->type() == QGraphicsTaikoItem::Type) {
-                Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->taiko;
+                Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->data;
                 taiko_data.x = taiko->pos().rx();
                 taiko_data.y = taiko->pos().ry();
                 stream<<taiko_data.x<<","<<taiko_data.y<<","<<taiko_data.angle<<","<<taiko_data.filename<<endl;

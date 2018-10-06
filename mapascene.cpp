@@ -147,7 +147,7 @@ QList<Instrumento> MapaScene::getTaikoItems() {
     QList<Instrumento> taikos;
     foreach (QGraphicsItem* taiko, items()){
         if (taiko->type() == QGraphicsTaikoItem::Type) {
-            Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->taiko;
+            Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->data;
             taiko_data.x = taiko->x();
             taiko_data.y = taiko->y();
             taikos.append(taiko_data);
