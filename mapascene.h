@@ -10,6 +10,7 @@
 
 class MapaScene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
     MapaScene(QObject* parent);
     void updateScene(Mapa* data, int ppm);
@@ -20,6 +21,10 @@ public:
     static QList<QGraphicsTaikoItem*> clipboard;
     void copy();
     void paste();
+
+public slots:
+    void onTaikoMoved(qreal old_x, qreal old_y, qreal new_x, qreal new_y);
+    void onTaikoRotated(qreal old_alpha, qreal new_alpha);
 
 protected:
     void keyPressEvent(QKeyEvent * keyEvent) override;

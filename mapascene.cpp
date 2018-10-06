@@ -150,7 +150,10 @@ void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle) {
     t->setOffset(-t->width/2,-t->height/2);
     t->setFlag(QGraphicsItem::ItemIsSelectable);
     t->setFlag(QGraphicsItem::ItemIsMovable);
+    t->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
     addItem(t);
+    connect(t, &QGraphicsTaikoItem::moved, this, &MapaScene::onTaikoMoved);
+    connect(t, &QGraphicsTaikoItem::rotated, this, &MapaScene::onTaikoRotated);
 }
 
 QList<Instrumento> MapaScene::getTaikoItems() {
@@ -184,4 +187,14 @@ void MapaScene::paste() {
         addInstrument(taiko->data.filename, taiko->data.x, taiko->data.y, taiko->data.angle);
     }
     updateScene(data, ppm);
+}
+
+void MapaScene::onTaikoMoved(qreal old_x, qreal old_y, qreal new_x, qreal new_y)
+{
+    printf("Moved from (%f, %f) to (%f, %f)\n", old_x,old_y,new_x,new_y);
+}
+
+void MapaScene::onTaikoRotated(qreal old_alpha, qreal new_alpha)
+{
+    printf("Rotated from %f to %f\n", old_alpha, new_alpha);
 }
