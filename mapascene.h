@@ -17,6 +17,9 @@ public:
     QList<Instrumento> getTaikoItems();
     Mapa* data;
     int ppm;
+    static QList<QGraphicsTaikoItem*> clipboard;
+    void copy();
+    void paste();
 
 protected:
     void keyPressEvent(QKeyEvent * keyEvent) override;

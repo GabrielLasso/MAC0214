@@ -9,6 +9,7 @@ class QGraphicsTaikoItem : public QGraphicsPixmapItem
 {
 public:
     QGraphicsTaikoItem(Instrumento taiko);
+    QGraphicsTaikoItem(QGraphicsTaikoItem* taiko);
     Instrumento data;
     int height, width;
     void rotate(qreal angle);

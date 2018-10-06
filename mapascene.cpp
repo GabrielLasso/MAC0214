@@ -54,6 +54,16 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
         }
         updateScene(data, ppm);
     break;
+    case Qt::Key_C:
+        if (keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
+            copy();
+        }
+    break;
+    case Qt::Key_V:
+        if (keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
+            paste();
+        }
+    break;
     }
 }
 
@@ -154,4 +164,24 @@ QList<Instrumento> MapaScene::getTaikoItems() {
         }
     }
     return taikos;
+}
+
+QList<QGraphicsTaikoItem*> MapaScene::clipboard;
+
+void MapaScene::copy() {
+    this->clipboard.clear();
+    foreach (QGraphicsItem* taiko, selectedItems()){
+        if (taiko->type() == QGraphicsTaikoItem::Type) {
+            QGraphicsTaikoItem* taiko_item = new QGraphicsTaikoItem(dynamic_cast<QGraphicsTaikoItem*>(taiko));
+            this->clipboard.append(taiko_item);
+        }
+    }
+}
+
+
+void MapaScene::paste() {
+    foreach (QGraphicsTaikoItem* taiko, this->clipboard){
+        addInstrument(taiko->data.filename, taiko->data.x, taiko->data.y, taiko->data.angle);
+    }
+    updateScene(data, ppm);
 }
