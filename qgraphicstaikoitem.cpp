@@ -28,9 +28,9 @@ void QGraphicsTaikoItem::rotate(qreal angle) {
 QVariant QGraphicsTaikoItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange){
-        emit moved(x(), y(), value.toPointF().rx(), value.toPointF().ry());
+        emit moved(this, x(), y(), value.toPointF().rx(), value.toPointF().ry());
     } else if (change == ItemRotationChange) {
-        emit rotated(rotation(), value.toReal());
+        emit rotated(this, rotation(), value.toReal());
     }
     return QGraphicsItem::itemChange(change, value);
 }

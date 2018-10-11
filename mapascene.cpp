@@ -2,7 +2,7 @@
 
 MapaScene::MapaScene(QObject* parent):QGraphicsScene(parent)
 {
-
+    undo_stack = new QUndoStack(nullptr);
 }
 
 void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
@@ -62,6 +62,13 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
     case Qt::Key_V:
         if (keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
             paste();
+        }
+    break;
+    case Qt::Key_Z:
+        if (keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
+            undo_stack->undo();
+        } else if (keyEvent->modifiers().testFlag(Qt::ShiftModifier)) {
+            undo_stack->redo();
         }
     break;
     }
@@ -189,12 +196,14 @@ void MapaScene::paste() {
     updateScene(data, ppm);
 }
 
-void MapaScene::onTaikoMoved(qreal old_x, qreal old_y, qreal new_x, qreal new_y)
+void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y)
 {
+    CommandMove* command = new CommandMove(taiko, old_x, old_y, new_x, new_y);
+//    undo_stack->push(command);
     printf("Moved from (%f, %f) to (%f, %f)\n", old_x,old_y,new_x,new_y);
 }
 
-void MapaScene::onTaikoRotated(qreal old_alpha, qreal new_alpha)
+void MapaScene::onTaikoRotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha)
 {
     printf("Rotated from %f to %f\n", old_alpha, new_alpha);
 }
