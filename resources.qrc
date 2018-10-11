@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>Image/Hayashi (nanamedai).png</file>
+        <file>Image/Hiradaiko (sueokidai).png</file>
+        <file>Image/Hiradaiko (yaguradai).png</file>
+        <file>Image/Hiradaiko (yokookidai).png</file>
+        <file>Image/Hiraoke (sueokidai).png</file>
+        <file>Image/Hiraoke (yaguradai).png</file>
+        <file>Image/Katsugui.png</file>
+        <file>Image/Nagado (nanamedai).png</file>
+        <file>Image/Nagado (sueokidai).png</file>
+        <file>Image/Nagado (titibudai).png</file>
+        <file>Image/Nagado (yokookidai).png</file>
+        <file>Image/Okedo (eitetsudai).png</file>
+        <file>Image/Okedo (nanamedai).png</file>
+        <file>Image/Okedo (sueokidai).png</file>
+        <file>Image/Okedo (yokookidai).png</file>
+        <file>Image/Ooke (yaguradai).png</file>
+        <file>Image/Shime (swaridai).png</file>
+        <file>Image/Shime (tatidai).png</file>
+        <file>Image/Tekkan.png</file>
+    </qresource>
+</RCC>

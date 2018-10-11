@@ -1,19 +1,19 @@
 #include "qgraphicstaikoitem.h"
 
-QGraphicsTaikoItem::QGraphicsTaikoItem(Instrumento taiko):QGraphicsPixmapItem(QPixmap("Image/"+taiko.filename))
+QGraphicsTaikoItem::QGraphicsTaikoItem(Instrumento taiko):QGraphicsPixmapItem(QPixmap(":/res/Image/"+taiko.filename))
 {
     setPos(taiko.x, taiko.y);
-    this->height = QPixmap("Image/"+taiko.filename).height();
-    this->width = QPixmap("Image/"+taiko.filename).width();
+    this->height = QPixmap(":/res/Image/"+taiko.filename).height();
+    this->width = QPixmap(":/res/Image/"+taiko.filename).width();
     this->data = taiko;
     this->setRotation(taiko.angle);
 }
 
-QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixmapItem(QPixmap("Image/"+taiko->data.filename))
+QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixmapItem(QPixmap(":/res/Image/"+taiko->data.filename))
 {
     setPos(taiko->x(), taiko->y());
-    this->height = QPixmap("Image/"+taiko->data.filename).height();
-    this->width = QPixmap("Image/"+taiko->data.filename).width();
+    this->height = QPixmap(":/res/Image/"+taiko->data.filename).height();
+    this->width = QPixmap(":/res/Image/"+taiko->data.filename).width();
     this->data = taiko->data;
     this->data.x = taiko->x();
     this->data.y= taiko->y();

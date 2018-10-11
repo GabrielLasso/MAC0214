@@ -20,12 +20,12 @@ MapaWidget::~MapaWidget()
 }
 
 void MapaWidget::loadList() {
-    QDirIterator dirIt("Image/",QDirIterator::Subdirectories);
+    QDirIterator dirIt(":/res/Image/",QDirIterator::Subdirectories);
     while (dirIt.hasNext()) {
         dirIt.next();
         if (QFileInfo(dirIt.filePath()).isFile()) {
             QString filename = dirIt.fileName().split(".")[0];
-            QListWidgetItem* instr = new QListWidgetItem(QIcon("Image/"+filename), filename);
+            QListWidgetItem* instr = new QListWidgetItem(QIcon(":/res/Image/"+filename), filename);
             instrumentos->addItem(instr);
         }
     }
