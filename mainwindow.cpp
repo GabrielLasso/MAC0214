@@ -5,13 +5,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(criaMapa()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(salvaMapa()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(carregaMapa()));
+//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(criaMapa()));
+//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(salvaMapa()));
+//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(carregaMapa()));
     ui->setupUi(this);
     novoMapa = ui->actionNovo_Mapa;
+    novoMapa->setShortcut(QKeySequence::New);
     loadMapa = ui->actionCarregar_Mapa;
+    loadMapa->setShortcut(QKeySequence::Open);
     saveMapa = ui->actionSalvar_Mapa;
+    saveMapa->setShortcut(QKeySequence::Save);
     exportMapa = ui->actionExportar_como_imagem;
     editMapa = ui->actionPropriedades_do_mapa;
     resize(QDesktopWidget().availableGeometry(this).size());

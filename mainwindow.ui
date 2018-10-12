@@ -57,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>153</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -90,12 +90,12 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNovo_Mapa">
    <property name="text">
-    <string>&amp;Novo Mapa (Ctrl+N)</string>
+    <string>&amp;Novo Mapa</string>
    </property>
   </action>
   <action name="actionCarregar_Mapa">
    <property name="text">
-    <string>&amp;Carregar Mapa (Ctrl+L)</string>
+    <string>&amp;Carregar Mapa</string>
    </property>
   </action>
   <action name="actionSalvar_Mapa">
@@ -103,7 +103,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Salvar Mapa (Ctrl+S)</string>
+    <string>&amp;Salvar Mapa</string>
    </property>
   </action>
   <action name="actionExportar_como_imagem">
@@ -111,7 +111,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Exportar como imagem</string>
+    <string>&amp;Exportar como imagem</string>
    </property>
   </action>
   <action name="actionPropriedades_do_mapa">
@@ -119,7 +119,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Propriedades do mapa</string>
+    <string>&amp;Propriedades do mapa</string>
    </property>
   </action>
  </widget>
