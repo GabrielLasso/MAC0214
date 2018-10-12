@@ -7,6 +7,8 @@
 #include <QKeyEvent>
 #include "qgraphicstaikoitem.h"
 #include "mapa.h"
+#include <QUndoStack>
+#include "commandmove.h"
 
 class MapaScene : public QGraphicsScene
 {
@@ -23,10 +25,11 @@ public:
     void paste();
 
 public slots:
-    void onTaikoMoved(qreal old_x, qreal old_y, qreal new_x, qreal new_y);
-    void onTaikoRotated(qreal old_alpha, qreal new_alpha);
+    void onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y);
+    void onTaikoRotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha);
 
 protected:
+    QUndoStack* undo_stack;
     void keyPressEvent(QKeyEvent * keyEvent) override;
 };
 

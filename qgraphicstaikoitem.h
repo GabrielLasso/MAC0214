@@ -18,8 +18,8 @@ public:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 signals:
-    void moved(qreal old_x, qreal old_y, qreal new_x, qreal new_y);
-    void rotated(qreal old_alpha, qreal new_alpha);
+    void moved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y);
+    void rotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha);
 };
 
 #endif // QGRAPHICSTAIKOITEM_H

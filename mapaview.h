@@ -16,9 +16,6 @@ public:
     int zoom;
     void setZoom();
 
-signals:
-    void zoomChanged(int newZoom);
-
 protected:
     void wheelEvent(QWheelEvent *event) override;
 };
