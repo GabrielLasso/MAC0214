@@ -33,7 +33,8 @@ SOURCES += \
     mapaview.cpp \
     commandmove.cpp \
     commandrotate.cpp \
-    commandadd.cpp
+    commandadd.cpp \
+    commanddelete.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     mapaview.h \
     commandmove.h \
     commandrotate.h \
-    commandadd.h
+    commandadd.h \
+    commanddelete.h
 
 FORMS += \
         mainwindow.ui \

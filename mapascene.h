@@ -11,6 +11,7 @@
 #include "commandmove.h"
 #include "commandrotate.h"
 #include "commandadd.h"
+#include "commanddelete.h"
 
 class MapaScene : public QGraphicsScene
 {

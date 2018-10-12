@@ -50,7 +50,8 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
     case Qt::Key_Delete:
         foreach(QGraphicsItem* item, selectedItems)
         {
-            delete item;
+            removeItem(item);
+            undo_stack->push(new CommandDelete(this, dynamic_cast<QGraphicsTaikoItem*>(item)));
         }
         updateScene(data, ppm);
     break;
@@ -66,9 +67,11 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
     break;
     case Qt::Key_Z:
         if (keyEvent->modifiers().testFlag(Qt::ControlModifier)) {
-            undo_stack->undo();
-        } else if (keyEvent->modifiers().testFlag(Qt::ShiftModifier)) {
-            undo_stack->redo();
+            if (keyEvent->modifiers().testFlag(Qt::ShiftModifier)) {
+                undo_stack->redo();
+            } else {
+                undo_stack->undo();
+            }
         }
     break;
     }
@@ -162,7 +165,7 @@ void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool 
     connect(t, &QGraphicsTaikoItem::moved, this, &MapaScene::onTaikoMoved);
     connect(t, &QGraphicsTaikoItem::rotated, this, &MapaScene::onTaikoRotated);
     if (newInstrument) {
-        undo_stack->push(new CommandAdd(t));
+        undo_stack->push(new CommandAdd(this, t));
     }
 }
 

@@ -1,16 +1,18 @@
 #include "commandadd.h"
 
-CommandAdd::CommandAdd(QGraphicsTaikoItem *item, QUndoCommand* parent)
+CommandAdd::CommandAdd(QGraphicsScene* scene, QGraphicsTaikoItem *item, QUndoCommand* parent)
     : QUndoCommand (parent)
 {
+    this->scene = scene;
     mItem = item;
 }
 
 void CommandAdd::undo()
 {
-    delete(mItem);
+    scene->removeItem(mItem);
 }
 
 void CommandAdd::redo()
 {
+    scene->addItem(mItem);
 }
