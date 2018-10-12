@@ -78,11 +78,11 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     int i,j;
     QPen pen3(QColor(0,0,0));
     QPen pen5(QColor(0,0,0));
-    QList<Instrumento> taikos = getTaikoItems();
+    QList<QGraphicsTaikoItem*> taikos = getTaikoItems();
     this->data = data;
     this->ppm = ppm;
 
-    clear();
+    removeItemsAndClearBackground();
     pen3.setWidth(3);
     pen5.setWidth(5);
 
@@ -129,8 +129,8 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     addLine(-data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,-data->height/2*ppm);
 
     // Taikos
-    for (Instrumento taiko : taikos) {
-        addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle);
+    foreach (QGraphicsTaikoItem* taiko, taikos) {
+        addItem(taiko);
     }
 
     // Instrument List
@@ -138,8 +138,8 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     addRect((data->width/2+1)*ppm, -data->height/2*ppm,200,data->height*ppm);
     QGraphicsTextItem *instrumentos_title = addText("Instrumentos");
     instrumentos_title->setPos((data->width/2+1)*ppm+100-instrumentos_title->boundingRect().width()/2, -data->height/2*ppm);
-    for (Instrumento taiko : taikos) {
-        instrument_hash.insert(taiko.filename,instrument_hash.value(taiko.filename)+1);
+    foreach (QGraphicsTaikoItem* taiko, taikos) {
+        instrument_hash.insert(taiko->data.filename,instrument_hash.value(taiko->data.filename)+1);
     }
     QHashIterator<QString, int> iterator(instrument_hash);
     for (i = 2; iterator.hasNext(); i++) {
@@ -166,14 +166,12 @@ void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool 
     }
 }
 
-QList<Instrumento> MapaScene::getTaikoItems() {
-    QList<Instrumento> taikos;
+QList<QGraphicsTaikoItem*> MapaScene::getTaikoItems() {
+    QList<QGraphicsTaikoItem*> taikos;
     foreach (QGraphicsItem* taiko, items()){
         if (taiko->type() == QGraphicsTaikoItem::Type) {
-            Instrumento taiko_data = dynamic_cast<QGraphicsTaikoItem*>(taiko)->data;
-            taiko_data.x = taiko->x();
-            taiko_data.y = taiko->y();
-            taikos.append(taiko_data);
+            QGraphicsTaikoItem* taiko_item = dynamic_cast<QGraphicsTaikoItem*>(taiko);
+            taikos.append(taiko_item);
         }
     }
     return taikos;
@@ -197,6 +195,17 @@ void MapaScene::paste() {
         addInstrument(taiko->data.filename, taiko->data.x, taiko->data.y, taiko->data.angle);
     }
     updateScene(data, ppm);
+}
+
+void MapaScene::removeItemsAndClearBackground()
+{
+    foreach (QGraphicsItem* item, items()){
+        if (item->type() == QGraphicsTaikoItem::Type) {
+            removeItem(item);
+        } else {
+            delete(item);
+        }
+    }
 }
 
 void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y)

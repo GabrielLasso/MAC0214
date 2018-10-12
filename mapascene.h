@@ -19,12 +19,15 @@ public:
     MapaScene(QObject* parent);
     void updateScene(Mapa* data, int ppm);
     void addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0, bool newInstrument = true);
-    QList<Instrumento> getTaikoItems();
+    QList<QGraphicsTaikoItem*> getTaikoItems();
     Mapa* data;
     int ppm;
     static QList<QGraphicsTaikoItem*> clipboard;
     void copy();
     void paste();
+
+private:
+    void removeItemsAndClearBackground();
 
 public slots:
     void onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y);
