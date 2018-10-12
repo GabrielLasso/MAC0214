@@ -115,3 +115,6 @@ A de copiar e colar eu consegui fazer sem dificuldades.
 A de desfazer e refazer foi mais compliicada. Eu pesquisei como funcionam as classes QUndoCommand e QUndoStack e vi que precisaria descobrir de alguma forma quando um instrumento é movido. Para isso tive que mudar algumas fuções insternas da classe QGraphicsItem, e isso levou mais tempo do que eu imaginei. Agora que o sinal está pronto será fácil fazer os comandos de desfazer e refazer.
 
 Também vi que o software não roda em computadores que não tenham o Qt instalado, aí pesquisei o que fazer e existe uma ferramenta que cria instalador que já arruma as dependências. Estou aprendendo a usar isso.
+
+## Semana 07/09
+Essa semana eu aprendi como dar deploy e criar um installer e consegui criar o comando de desfazer-refazer para quase tudo. Só falta redo() para mover e rotacionar que, por algum motivo, está dando segfault.
