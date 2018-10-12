@@ -5,9 +5,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(criaMapa()));
-//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(salvaMapa()));
-//    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(carregaMapa()));
     ui->setupUi(this);
     novoMapa = ui->actionNovo_Mapa;
     novoMapa->setShortcut(QKeySequence::New);

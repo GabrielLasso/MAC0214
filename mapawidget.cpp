@@ -36,7 +36,7 @@ void MapaWidget::createScene() {
     scene = new MapaScene(this);
     view->setScene(scene);
     foreach (Instrumento taiko, *data->taikos) {
-        scene->addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle);
+        scene->addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle, false);
     }
     scene->updateScene(data, ppm);
 }

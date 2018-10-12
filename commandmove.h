@@ -2,7 +2,6 @@
 #define COMMANMOVE_H
 
 #include <QUndoCommand>
-#include <QPoint>
 #include "qgraphicstaikoitem.h"
 
 class CommandMove : public QUndoCommand
@@ -13,8 +12,7 @@ public:
     void redo() override;
 private:
     QGraphicsItem* mItem;
-    QPointF mFrom;
-    QPointF mTo;
+    qreal fromX, fromY, toX, toY;
 };
 
 #endif // COMMANMOVE_H

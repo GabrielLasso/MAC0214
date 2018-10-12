@@ -31,7 +31,9 @@ SOURCES += \
     qgraphicstaikoitem.cpp \
     mapascene.cpp \
     mapaview.cpp \
-    commandmove.cpp
+    commandmove.cpp \
+    commandrotate.cpp \
+    commandadd.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +43,9 @@ HEADERS += \
     qgraphicstaikoitem.h \
     mapascene.h \
     mapaview.h \
-    commandmove.h
+    commandmove.h \
+    commandrotate.h \
+    commandadd.h
 
 FORMS += \
         mainwindow.ui \

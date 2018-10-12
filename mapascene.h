@@ -9,6 +9,8 @@
 #include "mapa.h"
 #include <QUndoStack>
 #include "commandmove.h"
+#include "commandrotate.h"
+#include "commandadd.h"
 
 class MapaScene : public QGraphicsScene
 {
@@ -16,7 +18,7 @@ class MapaScene : public QGraphicsScene
 public:
     MapaScene(QObject* parent);
     void updateScene(Mapa* data, int ppm);
-    void addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0);
+    void addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0, bool newInstrument = true);
     QList<Instrumento> getTaikoItems();
     Mapa* data;
     int ppm;

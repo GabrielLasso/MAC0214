@@ -2,7 +2,7 @@
 
 MapaScene::MapaScene(QObject* parent):QGraphicsScene(parent)
 {
-    undo_stack = new QUndoStack(nullptr);
+    undo_stack = new QUndoStack(parent);
 }
 
 void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
@@ -151,7 +151,7 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     }
 }
 
-void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle) {
+void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool newInstrument) {
     Instrumento taiko(x,y,angle,name);
     QGraphicsTaikoItem *t = new QGraphicsTaikoItem(taiko);
     t->setOffset(-t->width/2,-t->height/2);
@@ -161,6 +161,9 @@ void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle) {
     addItem(t);
     connect(t, &QGraphicsTaikoItem::moved, this, &MapaScene::onTaikoMoved);
     connect(t, &QGraphicsTaikoItem::rotated, this, &MapaScene::onTaikoRotated);
+    if (newInstrument) {
+        undo_stack->push(new CommandAdd(t));
+    }
 }
 
 QList<Instrumento> MapaScene::getTaikoItems() {
@@ -199,11 +202,13 @@ void MapaScene::paste() {
 void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y)
 {
     CommandMove* command = new CommandMove(taiko, old_x, old_y, new_x, new_y);
-//    undo_stack->push(command);
+    undo_stack->push(command);
     printf("Moved from (%f, %f) to (%f, %f)\n", old_x,old_y,new_x,new_y);
 }
 
 void MapaScene::onTaikoRotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha)
 {
+    CommandRotate* command = new CommandRotate(taiko, old_alpha, new_alpha);
+    undo_stack->push(command);
     printf("Rotated from %f to %f\n", old_alpha, new_alpha);
 }
