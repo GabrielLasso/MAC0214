@@ -46,3 +46,9 @@ void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         emit moved(static_cast<QGraphicsTaikoItem*>(item), item->x()-click_pos.rx(), item->y()-click_pos.ry(), item->x(), item->y());
     QGraphicsItem::mouseReleaseEvent(event);
 }
+
+void QGraphicsTaikoItem::moveBy(qreal dx, qreal dy)
+{
+    foreach (QGraphicsItem* item, this->scene()->selectedItems())
+        emit moved(static_cast<QGraphicsTaikoItem*>(item), item->x(), item->y(), item->x()+dx, item->y()+dy);
+}

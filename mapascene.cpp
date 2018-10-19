@@ -12,13 +12,13 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
     case Qt::Key_Up:
         foreach(QGraphicsItem* item, selectedItems)
         {
-            item->moveBy(0,-1);
+            static_cast<QGraphicsTaikoItem*>(item)->moveBy(0,-1);
         }
         break;
     case Qt::Key_Down:
         foreach(QGraphicsItem* item, selectedItems)
         {
-            item->moveBy(0,1);
+            static_cast<QGraphicsTaikoItem*>(item)->moveBy(0,1);
         }
         break;
     case Qt::Key_Left:
@@ -30,7 +30,7 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
         } else {
             foreach(QGraphicsItem* item, selectedItems)
             {
-                item->moveBy(-1,0);
+                static_cast<QGraphicsTaikoItem*>(item)->moveBy(-1,0);
             }
         }
         break;
@@ -43,7 +43,7 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
         } else {
             foreach(QGraphicsItem* item, selectedItems)
             {
-                item->moveBy(1,0);
+                static_cast<QGraphicsTaikoItem*>(item)->moveBy(1,0);
             }
         }
         break;

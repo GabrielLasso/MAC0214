@@ -16,6 +16,7 @@ public:
     Instrumento data;
     int height, width;
     void rotate(qreal angle);
+    void moveBy(qreal dx, qreal dy);
 
 signals:
     void moved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y);
@@ -25,6 +26,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     QPointF click_pos;
+
 };
 
 #endif // QGRAPHICSTAIKOITEM_H
