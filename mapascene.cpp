@@ -72,6 +72,7 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
             } else {
                 undo_stack->undo();
             }
+            updateScene(data, ppm);
         }
     break;
     }
@@ -161,11 +162,12 @@ void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool 
     t->setFlag(QGraphicsItem::ItemIsSelectable);
     t->setFlag(QGraphicsItem::ItemIsMovable);
     t->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
-    addItem(t);
     connect(t, &QGraphicsTaikoItem::moved, this, &MapaScene::onTaikoMoved);
     connect(t, &QGraphicsTaikoItem::rotated, this, &MapaScene::onTaikoRotated);
     if (newInstrument) {
         undo_stack->push(new CommandAdd(this, t));
+    } else {
+        addItem(t);
     }
 }
 

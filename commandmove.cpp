@@ -15,6 +15,11 @@ void CommandMove::undo()
     mItem->setPos(fromX, fromY);
 }
 
+void CommandMove::redo()
+{
+    mItem->setPos(toX, toY);
+}
+
 bool CommandMove::mergeWith(const QUndoCommand *command)
 {
     const CommandMove *moveCommand = static_cast<const CommandMove *>(command);

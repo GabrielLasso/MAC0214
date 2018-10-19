@@ -14,6 +14,11 @@ void CommandRotate::undo()
     mItem->setRotation(old_alpha);
 }
 
+void CommandRotate::redo()
+{
+    mItem->setRotation(new_alpha);
+}
+
 bool CommandRotate::mergeWith(const QUndoCommand *command)
 {
     const CommandRotate *moveCommand = static_cast<const CommandRotate *>(command);

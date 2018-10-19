@@ -22,15 +22,27 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixma
 
 void QGraphicsTaikoItem::rotate(qreal angle) {
     data.angle = rotation() + angle;
+    emit rotated(this, rotation(), rotation() + angle);
     this->setRotation(data.angle);
 }
 
-QVariant QGraphicsTaikoItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+void QGraphicsTaikoItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (change == ItemPositionChange){
-        emit moved(this, x(), y(), value.toPointF().rx(), value.toPointF().ry());
-    } else if (change == ItemRotationChange) {
-        emit rotated(this, rotation(), value.toReal());
-    }
-    return QGraphicsItem::itemChange(change, value);
+    click_pos += event->lastPos() - event->pos();
+    QGraphicsItem::mouseMoveEvent(event);
+}
+
+void QGraphicsTaikoItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    click_pos = QPointF();
+    QGraphicsItem::mousePressEvent(event);
+}
+
+
+void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    click_pos += event->lastPos() - event->pos();
+    foreach (QGraphicsItem* item, this->scene()->selectedItems())
+        emit moved(static_cast<QGraphicsTaikoItem*>(item), item->x()-click_pos.rx(), item->y()-click_pos.ry(), item->x(), item->y());
+    QGraphicsItem::mouseReleaseEvent(event);
 }
