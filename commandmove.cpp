@@ -15,7 +15,16 @@ void CommandMove::undo()
     mItem->setPos(fromX, fromY);
 }
 
-void CommandMove::redo()
+bool CommandMove::mergeWith(const QUndoCommand *command)
 {
-//    mItem->setPos(toX, toY);
+    const CommandMove *moveCommand = static_cast<const CommandMove *>(command);
+    QGraphicsTaikoItem *item = moveCommand->mItem;
+
+    if (mItem != item)
+        return false;
+
+    toX = item->x();
+    toY = item->y();
+
+    return true;
 }

@@ -14,7 +14,15 @@ void CommandRotate::undo()
     mItem->setRotation(old_alpha);
 }
 
-void CommandRotate::redo()
+bool CommandRotate::mergeWith(const QUndoCommand *command)
 {
-//    mItem->setRotation(new_alpha);
+    const CommandRotate *moveCommand = static_cast<const CommandRotate *>(command);
+    QGraphicsTaikoItem *item = moveCommand->mItem;
+
+    if (mItem != item)
+        return false;
+
+    new_alpha = item->rotation();
+
+    return true;
 }

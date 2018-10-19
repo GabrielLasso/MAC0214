@@ -101,7 +101,7 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     QGraphicsTextItem *teamHUD = addText("Equipe");
     team->setPos(((200+ppm)/2-data->width*ppm/2+teamHUD->boundingRect().width()-team->boundingRect().width())/2, -(data->height/2+1)*ppm-24);
     teamHUD->setPos(-data->width/2*ppm, -(data->height/2+1)*ppm-24);
-    addRect(-data->width/2*ppm,-(data->height/2+1)*ppm-24,data->width*ppm/2+125,24,pen3);
+    addRect(-data->width/2*ppm,-(data->height/2+1)*ppm-24,data->width*ppm/2+(200+ppm)/2,24,pen3);
     addLine(-data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, -data->width/2*ppm+teamHUD->boundingRect().width(), -(data->height/2+1)*ppm);
 
     QGraphicsTextItem *city = addText(data->cidade);

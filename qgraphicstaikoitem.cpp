@@ -21,7 +21,7 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixma
 }
 
 void QGraphicsTaikoItem::rotate(qreal angle) {
-    data.angle += angle;
+    data.angle = rotation() + angle;
     this->setRotation(data.angle);
 }
 

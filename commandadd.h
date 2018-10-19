@@ -13,7 +13,7 @@ public:
     void redo() override;
 private:
     QGraphicsScene* scene;
-    QGraphicsItem* mItem;
+    QGraphicsTaikoItem* mItem;
 };
 
 #endif // COMMANDADD_H
