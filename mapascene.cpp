@@ -219,8 +219,8 @@ void MapaScene::onTaikoMoved(QSet<QGraphicsItem *> items, qreal dx, qreal dy)
     undo_stack->push(command);
 }
 
-void MapaScene::onTaikoRotated(QGraphicsTaikoItem* taiko, qreal da)
+void MapaScene::onTaikoRotated(QSet<QGraphicsItem *> items, qreal da)
 {
-    CommandRotate* command = new CommandRotate(taiko, da);
+    CommandRotate* command = new CommandRotate(items, da);
     undo_stack->push(command);
 }

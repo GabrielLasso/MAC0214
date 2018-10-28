@@ -32,7 +32,7 @@ private:
 
 public slots:
     void onTaikoMoved(QSet<QGraphicsItem *> items, qreal dx, qreal dy);
-    void onTaikoRotated(QGraphicsTaikoItem* taiko, qreal da);
+    void onTaikoRotated(QSet<QGraphicsItem *> items, qreal da);
 
 protected:
     QUndoStack* undo_stack;

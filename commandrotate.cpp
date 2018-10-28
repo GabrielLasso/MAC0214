@@ -1,29 +1,35 @@
 #include "commandrotate.h"
 
 
-CommandRotate::CommandRotate(QGraphicsTaikoItem *item, qreal da, QUndoCommand *parent)
+CommandRotate::CommandRotate(QSet<QGraphicsItem *> items, qreal da, QUndoCommand *parent)
     : QUndoCommand (parent)
 {
-    mItem = item;
+    this->items = items;
     this->da = da;
 }
 
+
 void CommandRotate::undo()
 {
-    mItem->setRotation(mItem->rotation() - da);
+    foreach (QGraphicsItem* item, items) {
+        QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);
+        taiko->setRotation(taiko->rotation() - da);
+    }
 }
 
 void CommandRotate::redo()
 {
-    mItem->setRotation(mItem->rotation() + da);
+    foreach (QGraphicsItem* item, items) {
+        QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);
+        taiko->setRotation(taiko->rotation() + da);
+    }
 }
 
 bool CommandRotate::mergeWith(const QUndoCommand *command)
 {
     const CommandRotate *rotateCommand = static_cast<const CommandRotate *>(command);
-    QGraphicsTaikoItem *item = rotateCommand->mItem;
 
-    if (mItem != item)
+    if (this->items != rotateCommand->items)
         return false;
 
     da += rotateCommand->da;

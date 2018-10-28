@@ -21,8 +21,8 @@ public:
     void moveBy(qreal dx, qreal dy);
 
 signals:
-    void moved(QSet<QGraphicsItem*> taiko, qreal dx, qreal dy);
-    void rotated(QGraphicsTaikoItem* taiko, qreal da);
+    void moved(QSet<QGraphicsItem*> items, qreal dx, qreal dy);
+    void rotated(QSet<QGraphicsItem*> items, qreal da);
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
