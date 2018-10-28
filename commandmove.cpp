@@ -1,29 +1,34 @@
 #include "commandmove.h"
 
-CommandMove::CommandMove(QGraphicsTaikoItem *item, qreal dx, qreal dy, QUndoCommand* parent)
+CommandMove::CommandMove(QSet<QGraphicsItem*> items, qreal dx, qreal dy, QUndoCommand* parent)
     : QUndoCommand (parent)
 {
-    mItem = item;
+    this->items = items;
     this->dx = dx;
     this->dy = dy;
 }
 
 void CommandMove::undo()
 {
-    mItem->setPos(mItem->x()-dx, mItem->y()-dy);
+    foreach (QGraphicsItem* item, items) {
+        QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);
+        taiko->setPos(taiko->x()-dx, taiko->y()-dy);
+    }
 }
 
 void CommandMove::redo()
 {
-    mItem->setPos(mItem->x()+dx, mItem->y()+dy);
+    foreach (QGraphicsItem* item, items) {
+        QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);
+        taiko->setPos(taiko->x()+dx, taiko->y()+dy);
+    }
 }
 
 bool CommandMove::mergeWith(const QUndoCommand *command)
 {
     const CommandMove *moveCommand = static_cast<const CommandMove *>(command);
-    QGraphicsTaikoItem *item = moveCommand->mItem;
 
-    if (mItem != item)
+    if (this->items != moveCommand->items)
         return false;
 
     dx += moveCommand->dx;

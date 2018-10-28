@@ -1,5 +1,7 @@
 #include "qgraphicstaikoitem.h"
 
+#include <QSet>
+
 QGraphicsTaikoItem::QGraphicsTaikoItem(Instrumento taiko):QGraphicsPixmapItem(QPixmap(":/res/Image/"+taiko.filename))
 {
     setPos(taiko.x, taiko.y);
@@ -43,8 +45,9 @@ void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     qreal dx = x() - click_pos.rx();
     qreal dy = y() - click_pos.ry();
+    QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
+    emit moved(items, dx, dy);
     foreach (QGraphicsItem* item, this->scene()->selectedItems()) {
-        emit moved(static_cast<QGraphicsTaikoItem*>(item), dx, dy);
         item->setPos(item->x()-dx, item->y()-dy);
     }
     QGraphicsItem::mouseReleaseEvent(event);
@@ -52,6 +55,6 @@ void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void QGraphicsTaikoItem::moveBy(qreal dx, qreal dy)
 {
-    foreach (QGraphicsItem* item, this->scene()->selectedItems())
-        emit moved(static_cast<QGraphicsTaikoItem*>(item), dx, dy);
+    QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
+    emit moved(items, dx, dy);
 }

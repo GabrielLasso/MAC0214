@@ -213,9 +213,9 @@ void MapaScene::removeItemsAndClearBackground()
     }
 }
 
-void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal dx, qreal dy)
+void MapaScene::onTaikoMoved(QSet<QGraphicsItem *> items, qreal dx, qreal dy)
 {
-    CommandMove* command = new CommandMove(taiko, dx, dy);
+    CommandMove* command = new CommandMove(items, dx, dy);
     undo_stack->push(command);
 }
 

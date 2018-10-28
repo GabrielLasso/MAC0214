@@ -31,7 +31,7 @@ private:
     void removeItemsAndClearBackground();
 
 public slots:
-    void onTaikoMoved(QGraphicsTaikoItem* taiko, qreal dx, qreal dy);
+    void onTaikoMoved(QSet<QGraphicsItem *> items, qreal dx, qreal dy);
     void onTaikoRotated(QGraphicsTaikoItem* taiko, qreal da);
 
 protected:
