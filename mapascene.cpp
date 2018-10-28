@@ -144,14 +144,14 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     }
 
     // Instrument List
-    QHash<QString, int> instrument_hash;
+    QMap<QString, int> instrument_hash;
     addRect((data->width/2+1)*ppm, -data->height/2*ppm,200,data->height*ppm);
     QGraphicsTextItem *instrumentos_title = addText("Instrumentos");
     instrumentos_title->setPos((data->width/2+1)*ppm+100-instrumentos_title->boundingRect().width()/2, -data->height/2*ppm);
     foreach (QGraphicsTaikoItem* taiko, taikos) {
         instrument_hash.insert(taiko->data.filename,instrument_hash.value(taiko->data.filename)+1);
     }
-    QHashIterator<QString, int> iterator(instrument_hash);
+    QMapIterator<QString, int> iterator(instrument_hash);
     for (i = 2; iterator.hasNext(); i++) {
         iterator.next();
         QGraphicsTextItem *instrument_name = addText(iterator.key());
