@@ -46,9 +46,11 @@ void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     qreal dx = x() - click_pos.rx();
     qreal dy = y() - click_pos.ry();
     QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
-    emit moved(items, dx, dy);
-    foreach (QGraphicsItem* item, this->scene()->selectedItems()) {
-        item->setPos(item->x()-dx, item->y()-dy);
+    if (int(dx) != 0 || int(dy) != 0) {
+        emit moved(items, dx, dy);
+        foreach (QGraphicsItem* item, this->scene()->selectedItems()) {
+            item->setPos(item->x()-dx, item->y()-dy);
+        }
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
