@@ -213,16 +213,14 @@ void MapaScene::removeItemsAndClearBackground()
     }
 }
 
-void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y)
+void MapaScene::onTaikoMoved(QGraphicsTaikoItem* taiko, qreal dx, qreal dy)
 {
-    CommandMove* command = new CommandMove(taiko, old_x, old_y, new_x, new_y);
+    CommandMove* command = new CommandMove(taiko, dx, dy);
     undo_stack->push(command);
-    printf("Moved from (%f, %f) to (%f, %f)\n", old_x,old_y,new_x,new_y);
 }
 
-void MapaScene::onTaikoRotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha)
+void MapaScene::onTaikoRotated(QGraphicsTaikoItem* taiko, qreal da)
 {
-    CommandRotate* command = new CommandRotate(taiko, old_alpha, new_alpha);
+    CommandRotate* command = new CommandRotate(taiko, da);
     undo_stack->push(command);
-    printf("Rotated from %f to %f\n", old_alpha, new_alpha);
 }

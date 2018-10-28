@@ -6,6 +6,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QVariant>
 #include <QGraphicsScene>
+#include <QtMath>
 
 class QGraphicsTaikoItem : public QObject, public QGraphicsPixmapItem
 {
@@ -15,12 +16,12 @@ public:
     QGraphicsTaikoItem(QGraphicsTaikoItem* taiko);
     Instrumento data;
     int height, width;
-    void rotate(qreal angle);
+    void rotate(qreal da);
     void moveBy(qreal dx, qreal dy);
 
 signals:
-    void moved(QGraphicsTaikoItem* taiko, qreal old_x, qreal old_y, qreal new_x, qreal new_y);
-    void rotated(QGraphicsTaikoItem* taiko, qreal old_alpha, qreal new_alpha);
+    void moved(QGraphicsTaikoItem* taiko, qreal dx, qreal dy);
+    void rotated(QGraphicsTaikoItem* taiko, qreal da);
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

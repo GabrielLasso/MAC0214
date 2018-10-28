@@ -7,14 +7,14 @@
 class CommandMove : public QUndoCommand
 {
 public:
-    CommandMove(QGraphicsTaikoItem *item, qreal fromX, qreal fromY, qreal toX, qreal toY, QUndoCommand* parent = nullptr);
+    CommandMove(QGraphicsTaikoItem *item, qreal dx, qreal dy, QUndoCommand* parent = nullptr);
     void undo() override;
     void redo() override;
     bool mergeWith(const QUndoCommand *command) override;
     int id() const override { return 1729; }
 private:
     QGraphicsTaikoItem* mItem;
-    qreal fromX, fromY, toX, toY;
+    qreal dx, dy;
 };
 
 #endif // COMMANMOVE_H

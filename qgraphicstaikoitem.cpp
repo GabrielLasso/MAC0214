@@ -22,33 +22,36 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixma
 
 void QGraphicsTaikoItem::rotate(qreal angle) {
     data.angle = rotation() + angle;
-    emit rotated(this, rotation(), rotation() + angle);
+    emit rotated(this, angle);
     this->setRotation(data.angle);
-}
-
-void QGraphicsTaikoItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    click_pos += event->lastPos() - event->pos();
-    QGraphicsItem::mouseMoveEvent(event);
 }
 
 void QGraphicsTaikoItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    click_pos = QPointF();
+    qreal a = qDegreesToRadians(rotation());
+    QTransform rotationMatrix(qCos(a), qSin(a), -qSin(a), qCos(a), 0, 0);
+    click_pos = event->scenePos() - rotationMatrix.map(event->pos());
     QGraphicsItem::mousePressEvent(event);
 }
 
+void QGraphicsTaikoItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mouseMoveEvent(event);
+}
 
 void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    click_pos += event->lastPos() - event->pos();
-    foreach (QGraphicsItem* item, this->scene()->selectedItems())
-        emit moved(static_cast<QGraphicsTaikoItem*>(item), item->x()-click_pos.rx(), item->y()-click_pos.ry(), item->x(), item->y());
+    qreal dx = x() - click_pos.rx();
+    qreal dy = y() - click_pos.ry();
+    foreach (QGraphicsItem* item, this->scene()->selectedItems()) {
+        emit moved(static_cast<QGraphicsTaikoItem*>(item), dx, dy);
+        item->setPos(item->x()-dx, item->y()-dy);
+    }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void QGraphicsTaikoItem::moveBy(qreal dx, qreal dy)
 {
     foreach (QGraphicsItem* item, this->scene()->selectedItems())
-        emit moved(static_cast<QGraphicsTaikoItem*>(item), item->x(), item->y(), item->x()+dx, item->y()+dy);
+        emit moved(static_cast<QGraphicsTaikoItem*>(item), dx, dy);
 }
