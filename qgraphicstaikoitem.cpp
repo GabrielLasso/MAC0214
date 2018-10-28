@@ -13,20 +13,18 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(Instrumento taiko):QGraphicsPixmapItem(QP
 
 QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixmapItem(QPixmap(":/res/Image/"+taiko->data.filename))
 {
-    setPos(taiko->x(), taiko->y());
     this->height = QPixmap(":/res/Image/"+taiko->data.filename).height();
     this->width = QPixmap(":/res/Image/"+taiko->data.filename).width();
     this->data = taiko->data;
     this->data.x = taiko->x();
     this->data.y= taiko->y();
+    this->setPos(taiko->x(), taiko->y());
     this->setRotation(taiko->data.angle);
 }
 
 void QGraphicsTaikoItem::rotate(qreal angle) {
-    data.angle = rotation() + angle;
     QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
     emit rotated(items, angle);
-    this->setRotation(data.angle);
 }
 
 void QGraphicsTaikoItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -56,8 +54,3 @@ void QGraphicsTaikoItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsTaikoItem::moveBy(qreal dx, qreal dy)
-{
-    QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
-    emit moved(items, dx, dy);
-}

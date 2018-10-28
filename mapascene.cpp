@@ -10,15 +10,17 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
     QList<QGraphicsItem*> selectedItems = this->selectedItems();
     switch(keyEvent->key()) {
     case Qt::Key_Up:
-        foreach(QGraphicsItem* item, selectedItems)
-        {
-            static_cast<QGraphicsTaikoItem*>(item)->moveBy(0,-1);
+        if (!selectedItems.empty()) {
+            QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+            QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+            emit item->moved(items, 0, -1);
         }
         break;
     case Qt::Key_Down:
-        foreach(QGraphicsItem* item, selectedItems)
-        {
-            static_cast<QGraphicsTaikoItem*>(item)->moveBy(0,1);
+        if (!selectedItems.empty()) {
+            QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+            QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+            emit item->moved(items, 0, 1);
         }
         break;
     case Qt::Key_Left:
@@ -28,9 +30,10 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
                 dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(-5);
             }
         } else {
-            foreach(QGraphicsItem* item, selectedItems)
-            {
-                static_cast<QGraphicsTaikoItem*>(item)->moveBy(-1,0);
+            if (!selectedItems.empty()) {
+                QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+                QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+                emit item->moved(items, -1, 0);
             }
         }
         break;
@@ -41,9 +44,10 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
                 dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(5);
             }
         } else {
-            foreach(QGraphicsItem* item, selectedItems)
-            {
-                static_cast<QGraphicsTaikoItem*>(item)->moveBy(1,0);
+            if (!selectedItems.empty()) {
+                QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+                QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+                emit item->moved(items, 1, 0);
             }
         }
         break;
