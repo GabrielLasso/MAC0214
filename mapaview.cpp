@@ -18,13 +18,14 @@ void MapaView::wheelEvent(QWheelEvent *event) {
     if (scene()->selectedItems().empty())
         QGraphicsView::wheelEvent(event);
 
-    foreach(QGraphicsItem* item, scene()->selectedItems())
-    {
+    if (!this->scene()->selectedItems().empty()) {
+        QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(this->scene()->selectedItems().first());
+        QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
         if (event->delta() > 0) {
-            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(5);
+            emit item->rotated(items, 5);
         }
         else {
-            dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(-5);
+            emit item->rotated(items, -5);
         }
     }
 }

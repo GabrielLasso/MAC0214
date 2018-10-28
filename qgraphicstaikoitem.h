@@ -17,8 +17,6 @@ public:
     QGraphicsTaikoItem(QGraphicsTaikoItem* taiko);
     Instrumento data;
     int height, width;
-    void rotate(qreal da);
-    void moveBy(qreal dx, qreal dy);
 
 signals:
     void moved(QSet<QGraphicsItem*> items, qreal dx, qreal dy);

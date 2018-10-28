@@ -25,9 +25,10 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
         break;
     case Qt::Key_Left:
         if (keyEvent->modifiers().testFlag(Qt::ShiftModifier)) {
-            foreach(QGraphicsItem* item, selectedItems)
-            {
-                dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(-5);
+            if (!selectedItems.empty()) {
+                QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+                QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+                emit item->rotated(items, -5);
             }
         } else {
             if (!selectedItems.empty()) {
@@ -39,9 +40,10 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
         break;
     case Qt::Key_Right:
         if (keyEvent->modifiers().testFlag(Qt::ShiftModifier)) {
-            foreach(QGraphicsItem* item, selectedItems)
-            {
-                dynamic_cast<QGraphicsTaikoItem*>(item)->rotate(5);
+            if (!selectedItems.empty()) {
+                QGraphicsTaikoItem* item = static_cast<QGraphicsTaikoItem*>(selectedItems.first());
+                QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(selectedItems);
+                emit item->rotated(items, 5);
             }
         } else {
             if (!selectedItems.empty()) {

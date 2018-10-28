@@ -22,11 +22,6 @@ QGraphicsTaikoItem::QGraphicsTaikoItem(QGraphicsTaikoItem* taiko):QGraphicsPixma
     this->setRotation(taiko->data.angle);
 }
 
-void QGraphicsTaikoItem::rotate(qreal angle) {
-    QSet<QGraphicsItem*> items = QSet<QGraphicsItem*>::fromList(this->scene()->selectedItems());
-    emit rotated(items, angle);
-}
-
 void QGraphicsTaikoItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     qreal a = qDegreesToRadians(rotation());
