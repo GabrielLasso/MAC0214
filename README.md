@@ -132,3 +132,13 @@ Vários bugs relacionados a undo/redo corrigidos.
 
 ## Semana 28/10
 Estou deixando os instrumentos de tamanhos mais realistas. O software já está num nível bom de usabilidade e só faltam esses detalhes mesmo
+
+## Mês de novembro
+No mês de novembro, não mantive o padrão de 6 horas por semana por conta do TCC.
+
+No entanto, realizei várias coisas:
+- Criei o pôster da diciplina, disponível em https://pt.overleaf.com/read/gbtvwffwwysr
+- Foi identificado um problema no deploy pra windows, instalei windows em um computador meu para testar isso
+- Apareceram pessoas das comunidades de taiko da Bahia e do Paraná interessadas no projeto
+- O projeto foi apresentado em uma reunião da Associação Brasileira de Taiko
+- Escrevi o relatório final da disciplina
