@@ -5,7 +5,7 @@ MapaWidget::MapaWidget(QWidget *parent, Mapa *data) :
     QWidget(parent),
     ui(new Ui::MapaWidget)
 {
-    ppm = 50; // Pixel per meter
+    ppm = 81; // Pixel per meter
     ui->setupUi(this);
     this->data = data;
     this->view = ui->view;
