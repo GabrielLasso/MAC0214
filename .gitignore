@@ -8,3 +8,4 @@ object_script.*
 release/*
 installer/installer.exe
 MapaPalco_resource.rc
+installer/installer.exe

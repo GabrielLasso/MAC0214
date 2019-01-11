@@ -40,5 +40,6 @@ Component.prototype.createOperations = function()
         component.addOperation("CreateShortcut", "@TargetDir@/MapaPalco.exe", "@StartMenuDir@/MapaPalco.lnk",
             "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll",
             "iconId=2", "description=Crie e edite mapas de palco");
+        component.addOperation("CreateShortcut", "@TargetDir@/MapaPalco.exe", "@DesktopDir@/MapaPalco.lnk");
     }
 }
