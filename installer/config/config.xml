@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>Mapa de palco</Name>
-    <Version>0.3</Version>
-    <Title>Mapa de palco</Title>
+    <Name>Formacao de taiko</Name>
+    <Version>1.0</Version>
+    <Title>Formacao de taiko</Title>
     <Publisher>ABT/Gabriel Lasso</Publisher>
     <!-- Directory name is used in component.xml -->
-    <StartMenuDir>Mapa de palco</StartMenuDir>
-    <TargetDir>@ApplicationsDir@/MapaPalco</TargetDir>
+    <StartMenuDir>Formacao de taiko</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/Formacao de taiko</TargetDir>
 </Installer>

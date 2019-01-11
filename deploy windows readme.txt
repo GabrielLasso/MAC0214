@@ -5,7 +5,7 @@ build_windows.bat
 rode no terminal
 
 cd release
-windeployqt MapaPalco.exe
+windeployqt FormacaoTaiko.exe
 
 e rode o script
 
