@@ -7,3 +7,4 @@ Makefile.Release
 object_script.*
 release/*
 installer/installer.exe
+MapaPalco_resource.rc

@@ -1,6 +1,6 @@
 Para dar deploy no windows, rode o script 
 
-deploy_windows.bat
+build_windows.bat
 
 rode no terminal
 
