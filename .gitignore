@@ -1,1 +1,9 @@
+// Auto generated when deploy
 installer/packages/org.abt.mapapalco/data
+.qmake.stash
+Makefile
+Makefile.Debug
+Makefile.Release
+object_script.*
+release/*
+installer/installer.exe
